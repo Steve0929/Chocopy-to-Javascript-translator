@@ -21,8 +21,8 @@ public class chocogrammarParser extends Parser {
 		T__17=18, T__18=19, T__19=20, T__20=21, T__21=22, T__22=23, T__23=24, 
 		T__24=25, T__25=26, T__26=27, T__27=28, T__28=29, T__29=30, T__30=31, 
 		T__31=32, T__32=33, T__33=34, T__34=35, T__35=36, T__36=37, T__37=38, 
-		T__38=39, T__39=40, ID=41, IDSTRING=42, STRING=43, INT=44, NEWLINE=45, 
-		COMMENT=46, DEDENT=47, INDENT=48;
+		T__38=39, ID=40, IDSTRING=41, STRING=42, INTEGER=43, NEWLINE=44, COMMENT=45, 
+		WhiteSpace=46, DEDENT=47, INDENT=48;
 	public static final int
 		RULE_program = 0, RULE_class_def = 1, RULE_class_body = 2, RULE_func_def = 3, 
 		RULE_func_body = 4, RULE_typed_var = 5, RULE_type = 6, RULE_global_decl = 7, 
@@ -43,8 +43,8 @@ public class chocogrammarParser extends Parser {
 			null, "'class'", "'('", "')'", "':'", "'pass'", "'def'", "','", "'->'", 
 			"'['", "']'", "'global'", "'nonlocal'", "'='", "'if'", "'elif'", "'else'", 
 			"'while'", "'for'", "'in'", "'return'", "'None'", "'True'", "'False'", 
-			"'INTEGER'", "'not'", "'and'", "'or'", "'.'", "'-'", "'+'", "'*'", "'//'", 
-			"'%'", "'=='", "'!='", "'<='", "'>='", "'<'", "'>'", "'is'"
+			"'not'", "'and'", "'or'", "'.'", "'-'", "'+'", "'*'", "'//'", "'%'", 
+			"'=='", "'!='", "'<='", "'>='", "'<'", "'>'", "'is'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -53,8 +53,8 @@ public class chocogrammarParser extends Parser {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, null, null, null, null, "ID", "IDSTRING", "STRING", "INT", "NEWLINE", 
-			"COMMENT", "DEDENT", "INDENT"
+			null, null, null, null, "ID", "IDSTRING", "STRING", "INTEGER", "NEWLINE", 
+			"COMMENT", "WhiteSpace", "DEDENT", "INDENT"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -199,7 +199,7 @@ public class chocogrammarParser extends Parser {
 			setState(47);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__4) | (1L << T__8) | (1L << T__13) | (1L << T__16) | (1L << T__17) | (1L << T__19) | (1L << T__20) | (1L << T__21) | (1L << T__22) | (1L << T__23) | (1L << T__24) | (1L << T__28) | (1L << ID) | (1L << IDSTRING) | (1L << STRING))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__4) | (1L << T__8) | (1L << T__13) | (1L << T__16) | (1L << T__17) | (1L << T__19) | (1L << T__20) | (1L << T__21) | (1L << T__22) | (1L << T__23) | (1L << T__27) | (1L << ID) | (1L << IDSTRING) | (1L << STRING) | (1L << INTEGER))) != 0)) {
 				{
 				{
 				setState(44);
@@ -616,7 +616,7 @@ public class chocogrammarParser extends Parser {
 				setState(107); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__4) | (1L << T__8) | (1L << T__13) | (1L << T__16) | (1L << T__17) | (1L << T__19) | (1L << T__20) | (1L << T__21) | (1L << T__22) | (1L << T__23) | (1L << T__24) | (1L << T__28) | (1L << ID) | (1L << IDSTRING) | (1L << STRING))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__4) | (1L << T__8) | (1L << T__13) | (1L << T__16) | (1L << T__17) | (1L << T__19) | (1L << T__20) | (1L << T__21) | (1L << T__22) | (1L << T__23) | (1L << T__27) | (1L << ID) | (1L << IDSTRING) | (1L << STRING) | (1L << INTEGER))) != 0) );
 			}
 		}
 		catch (RecognitionException re) {
@@ -952,11 +952,11 @@ public class chocogrammarParser extends Parser {
 			case T__21:
 			case T__22:
 			case T__23:
-			case T__24:
-			case T__28:
+			case T__27:
 			case ID:
 			case IDSTRING:
 			case STRING:
+			case INTEGER:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(134);
@@ -1117,7 +1117,7 @@ public class chocogrammarParser extends Parser {
 				setState(174);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__8) | (1L << T__20) | (1L << T__21) | (1L << T__22) | (1L << T__23) | (1L << T__24) | (1L << T__28) | (1L << ID) | (1L << IDSTRING) | (1L << STRING))) != 0)) {
+				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__8) | (1L << T__20) | (1L << T__21) | (1L << T__22) | (1L << T__23) | (1L << T__27) | (1L << ID) | (1L << IDSTRING) | (1L << STRING) | (1L << INTEGER))) != 0)) {
 					{
 					setState(173);
 					expr(0);
@@ -1221,7 +1221,7 @@ public class chocogrammarParser extends Parser {
 				setState(192); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__4) | (1L << T__8) | (1L << T__13) | (1L << T__16) | (1L << T__17) | (1L << T__19) | (1L << T__20) | (1L << T__21) | (1L << T__22) | (1L << T__23) | (1L << T__24) | (1L << T__28) | (1L << ID) | (1L << IDSTRING) | (1L << STRING))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__4) | (1L << T__8) | (1L << T__13) | (1L << T__16) | (1L << T__17) | (1L << T__19) | (1L << T__20) | (1L << T__21) | (1L << T__22) | (1L << T__23) | (1L << T__27) | (1L << ID) | (1L << IDSTRING) | (1L << STRING) | (1L << INTEGER))) != 0) );
 			setState(194);
 			match(DEDENT);
 			}
@@ -1238,6 +1238,7 @@ public class chocogrammarParser extends Parser {
 	}
 
 	public static class LiteralContext extends ParserRuleContext {
+		public TerminalNode INTEGER() { return getToken(chocogrammarParser.INTEGER, 0); }
 		public TerminalNode IDSTRING() { return getToken(chocogrammarParser.IDSTRING, 0); }
 		public TerminalNode STRING() { return getToken(chocogrammarParser.STRING, 0); }
 		public LiteralContext(ParserRuleContext parent, int invokingState) {
@@ -1268,7 +1269,7 @@ public class chocogrammarParser extends Parser {
 			{
 			setState(196);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__20) | (1L << T__21) | (1L << T__22) | (1L << T__23) | (1L << IDSTRING) | (1L << STRING))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__20) | (1L << T__21) | (1L << T__22) | (1L << IDSTRING) | (1L << STRING) | (1L << INTEGER))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -1342,20 +1343,20 @@ public class chocogrammarParser extends Parser {
 			case T__20:
 			case T__21:
 			case T__22:
-			case T__23:
-			case T__28:
+			case T__27:
 			case ID:
 			case IDSTRING:
 			case STRING:
+			case INTEGER:
 				{
 				setState(199);
 				cexpr(0);
 				}
 				break;
-			case T__24:
+			case T__23:
 				{
 				setState(200);
-				match(T__24);
+				match(T__23);
 				setState(201);
 				expr(3);
 				}
@@ -1383,7 +1384,7 @@ public class chocogrammarParser extends Parser {
 						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
 						setState(205);
 						_la = _input.LA(1);
-						if ( !(_la==T__25 || _la==T__26) ) {
+						if ( !(_la==T__24 || _la==T__25) ) {
 						_errHandler.recoverInline(this);
 						}
 						else {
@@ -1508,7 +1509,7 @@ public class chocogrammarParser extends Parser {
 				setState(230);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__8) | (1L << T__20) | (1L << T__21) | (1L << T__22) | (1L << T__23) | (1L << T__24) | (1L << T__28) | (1L << ID) | (1L << IDSTRING) | (1L << STRING))) != 0)) {
+				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__8) | (1L << T__20) | (1L << T__21) | (1L << T__22) | (1L << T__23) | (1L << T__27) | (1L << ID) | (1L << IDSTRING) | (1L << STRING) | (1L << INTEGER))) != 0)) {
 					{
 					setState(222);
 					expr(0);
@@ -1554,7 +1555,7 @@ public class chocogrammarParser extends Parser {
 				setState(247);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__8) | (1L << T__20) | (1L << T__21) | (1L << T__22) | (1L << T__23) | (1L << T__24) | (1L << T__28) | (1L << ID) | (1L << IDSTRING) | (1L << STRING))) != 0)) {
+				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__8) | (1L << T__20) | (1L << T__21) | (1L << T__22) | (1L << T__23) | (1L << T__27) | (1L << ID) | (1L << IDSTRING) | (1L << STRING) | (1L << INTEGER))) != 0)) {
 					{
 					setState(239);
 					expr(0);
@@ -1584,7 +1585,7 @@ public class chocogrammarParser extends Parser {
 			case 6:
 				{
 				setState(250);
-				match(T__28);
+				match(T__27);
 				setState(251);
 				cexpr(1);
 				}
@@ -1621,7 +1622,7 @@ public class chocogrammarParser extends Parser {
 						setState(258);
 						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
 						setState(259);
-						match(T__27);
+						match(T__26);
 						setState(260);
 						match(ID);
 						}
@@ -1647,7 +1648,7 @@ public class chocogrammarParser extends Parser {
 						setState(266);
 						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
 						setState(267);
-						match(T__27);
+						match(T__26);
 						setState(268);
 						match(ID);
 						setState(269);
@@ -1655,7 +1656,7 @@ public class chocogrammarParser extends Parser {
 						setState(278);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
-						if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__8) | (1L << T__20) | (1L << T__21) | (1L << T__22) | (1L << T__23) | (1L << T__24) | (1L << T__28) | (1L << ID) | (1L << IDSTRING) | (1L << STRING))) != 0)) {
+						if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__8) | (1L << T__20) | (1L << T__21) | (1L << T__22) | (1L << T__23) | (1L << T__27) | (1L << ID) | (1L << IDSTRING) | (1L << STRING) | (1L << INTEGER))) != 0)) {
 							{
 							setState(270);
 							expr(0);
@@ -1731,7 +1732,7 @@ public class chocogrammarParser extends Parser {
 			{
 			setState(286);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__28) | (1L << T__29) | (1L << T__30) | (1L << T__31) | (1L << T__32) | (1L << T__33) | (1L << T__34) | (1L << T__35) | (1L << T__36) | (1L << T__37) | (1L << T__38) | (1L << T__39))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__27) | (1L << T__28) | (1L << T__29) | (1L << T__30) | (1L << T__31) | (1L << T__32) | (1L << T__33) | (1L << T__34) | (1L << T__35) | (1L << T__36) | (1L << T__37) | (1L << T__38))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -1799,7 +1800,7 @@ public class chocogrammarParser extends Parser {
 				setState(289);
 				cexpr(0);
 				setState(290);
-				match(T__27);
+				match(T__26);
 				setState(291);
 				match(ID);
 				}
@@ -1886,30 +1887,30 @@ public class chocogrammarParser extends Parser {
 		"\3\21\3\21\3\21\3\21\3\21\7\21\u0114\n\21\f\21\16\21\u0117\13\21\5\21"+
 		"\u0119\n\21\3\21\7\21\u011c\n\21\f\21\16\21\u011f\13\21\3\22\3\22\3\23"+
 		"\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\5\23\u012d\n\23\3\23\2\4"+
-		"\36 \24\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$\2\5\4\2\27\32,-\3\2"+
-		"\34\35\3\2\37*\2\u014c\2+\3\2\2\2\4\64\3\2\2\2\6G\3\2\2\2\bI\3\2\2\2\n"+
+		"\36 \24\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$\2\5\4\2\27\31+-\3\2"+
+		"\33\34\3\2\36)\2\u014c\2+\3\2\2\2\4\64\3\2\2\2\6G\3\2\2\2\bI\3\2\2\2\n"+
 		"g\3\2\2\2\fo\3\2\2\2\16y\3\2\2\2\20{\3\2\2\2\22\177\3\2\2\2\24\u0083\3"+
 		"\2\2\2\26\u00aa\3\2\2\2\30\u00bb\3\2\2\2\32\u00bd\3\2\2\2\34\u00c6\3\2"+
 		"\2\2\36\u00cc\3\2\2\2 \u00fe\3\2\2\2\"\u0120\3\2\2\2$\u012c\3\2\2\2&*"+
 		"\5\24\13\2\'*\5\b\5\2(*\5\4\3\2)&\3\2\2\2)\'\3\2\2\2)(\3\2\2\2*-\3\2\2"+
 		"\2+)\3\2\2\2+,\3\2\2\2,\61\3\2\2\2-+\3\2\2\2.\60\5\26\f\2/.\3\2\2\2\60"+
 		"\63\3\2\2\2\61/\3\2\2\2\61\62\3\2\2\2\62\3\3\2\2\2\63\61\3\2\2\2\64\65"+
-		"\7\3\2\2\65\66\7+\2\2\66\67\7\4\2\2\678\7+\2\289\7\5\2\29:\7\6\2\2:;\7"+
-		"/\2\2;<\7\62\2\2<=\5\6\4\2=>\7\61\2\2>\5\3\2\2\2?@\7\7\2\2@H\7/\2\2AD"+
+		"\7\3\2\2\65\66\7*\2\2\66\67\7\4\2\2\678\7*\2\289\7\5\2\29:\7\6\2\2:;\7"+
+		".\2\2;<\7\62\2\2<=\5\6\4\2=>\7\61\2\2>\5\3\2\2\2?@\7\7\2\2@H\7.\2\2AD"+
 		"\5\24\13\2BD\5\b\5\2CA\3\2\2\2CB\3\2\2\2DE\3\2\2\2EC\3\2\2\2EF\3\2\2\2"+
-		"FH\3\2\2\2G?\3\2\2\2GC\3\2\2\2H\7\3\2\2\2IJ\7\b\2\2JK\7+\2\2KT\7\4\2\2"+
+		"FH\3\2\2\2G?\3\2\2\2GC\3\2\2\2H\7\3\2\2\2IJ\7\b\2\2JK\7*\2\2KT\7\4\2\2"+
 		"LQ\5\f\7\2MN\7\t\2\2NP\5\f\7\2OM\3\2\2\2PS\3\2\2\2QO\3\2\2\2QR\3\2\2\2"+
 		"RU\3\2\2\2SQ\3\2\2\2TL\3\2\2\2TU\3\2\2\2UV\3\2\2\2VY\7\5\2\2WX\7\n\2\2"+
-		"XZ\5\16\b\2YW\3\2\2\2YZ\3\2\2\2Z[\3\2\2\2[\\\7\6\2\2\\]\7/\2\2]^\7\62"+
+		"XZ\5\16\b\2YW\3\2\2\2YZ\3\2\2\2Z[\3\2\2\2[\\\7\6\2\2\\]\7.\2\2]^\7\62"+
 		"\2\2^_\5\n\6\2_`\7\61\2\2`\t\3\2\2\2af\5\20\t\2bf\5\22\n\2cf\5\24\13\2"+
 		"df\5\b\5\2ea\3\2\2\2eb\3\2\2\2ec\3\2\2\2ed\3\2\2\2fi\3\2\2\2ge\3\2\2\2"+
 		"gh\3\2\2\2hk\3\2\2\2ig\3\2\2\2jl\5\26\f\2kj\3\2\2\2lm\3\2\2\2mk\3\2\2"+
-		"\2mn\3\2\2\2n\13\3\2\2\2op\7+\2\2pq\7\6\2\2qr\5\16\b\2r\r\3\2\2\2sz\7"+
-		"+\2\2tz\7,\2\2uv\7\13\2\2vw\5\16\b\2wx\7\f\2\2xz\3\2\2\2ys\3\2\2\2yt\3"+
-		"\2\2\2yu\3\2\2\2z\17\3\2\2\2{|\7\r\2\2|}\7+\2\2}~\7/\2\2~\21\3\2\2\2\177"+
-		"\u0080\7\16\2\2\u0080\u0081\7+\2\2\u0081\u0082\7/\2\2\u0082\23\3\2\2\2"+
+		"\2mn\3\2\2\2n\13\3\2\2\2op\7*\2\2pq\7\6\2\2qr\5\16\b\2r\r\3\2\2\2sz\7"+
+		"*\2\2tz\7+\2\2uv\7\13\2\2vw\5\16\b\2wx\7\f\2\2xz\3\2\2\2ys\3\2\2\2yt\3"+
+		"\2\2\2yu\3\2\2\2z\17\3\2\2\2{|\7\r\2\2|}\7*\2\2}~\7.\2\2~\21\3\2\2\2\177"+
+		"\u0080\7\16\2\2\u0080\u0081\7*\2\2\u0081\u0082\7.\2\2\u0082\23\3\2\2\2"+
 		"\u0083\u0084\5\f\7\2\u0084\u0085\7\17\2\2\u0085\u0086\5\34\17\2\u0086"+
-		"\u0087\7/\2\2\u0087\25\3\2\2\2\u0088\u0089\5\30\r\2\u0089\u008a\7/\2\2"+
+		"\u0087\7.\2\2\u0087\25\3\2\2\2\u0088\u0089\5\30\r\2\u0089\u008a\7.\2\2"+
 		"\u008a\u00ab\3\2\2\2\u008b\u008c\7\20\2\2\u008c\u008d\5\36\20\2\u008d"+
 		"\u008e\7\6\2\2\u008e\u0096\5\32\16\2\u008f\u0090\7\21\2\2\u0090\u0091"+
 		"\5\36\20\2\u0091\u0092\7\6\2\2\u0092\u0093\5\32\16\2\u0093\u0095\3\2\2"+
@@ -1918,7 +1919,7 @@ public class chocogrammarParser extends Parser {
 		"\u009a\u009b\7\6\2\2\u009b\u009d\5\32\16\2\u009c\u0099\3\2\2\2\u009c\u009d"+
 		"\3\2\2\2\u009d\u00ab\3\2\2\2\u009e\u009f\7\23\2\2\u009f\u00a0\5\36\20"+
 		"\2\u00a0\u00a1\7\6\2\2\u00a1\u00a2\5\32\16\2\u00a2\u00ab\3\2\2\2\u00a3"+
-		"\u00a4\7\24\2\2\u00a4\u00a5\7+\2\2\u00a5\u00a6\7\25\2\2\u00a6\u00a7\5"+
+		"\u00a4\7\24\2\2\u00a4\u00a5\7*\2\2\u00a5\u00a6\7\25\2\2\u00a6\u00a7\5"+
 		"\36\20\2\u00a7\u00a8\7\6\2\2\u00a8\u00a9\5\32\16\2\u00a9\u00ab\3\2\2\2"+
 		"\u00aa\u0088\3\2\2\2\u00aa\u008b\3\2\2\2\u00aa\u009e\3\2\2\2\u00aa\u00a3"+
 		"\3\2\2\2\u00ab\27\3\2\2\2\u00ac\u00bc\7\7\2\2\u00ad\u00bc\5\36\20\2\u00ae"+
@@ -1927,34 +1928,34 @@ public class chocogrammarParser extends Parser {
 		"\u00b4\u00b6\3\2\2\2\u00b5\u00b2\3\2\2\2\u00b6\u00b7\3\2\2\2\u00b7\u00b5"+
 		"\3\2\2\2\u00b7\u00b8\3\2\2\2\u00b8\u00b9\3\2\2\2\u00b9\u00ba\5\36\20\2"+
 		"\u00ba\u00bc\3\2\2\2\u00bb\u00ac\3\2\2\2\u00bb\u00ad\3\2\2\2\u00bb\u00ae"+
-		"\3\2\2\2\u00bb\u00b5\3\2\2\2\u00bc\31\3\2\2\2\u00bd\u00be\7/\2\2\u00be"+
+		"\3\2\2\2\u00bb\u00b5\3\2\2\2\u00bc\31\3\2\2\2\u00bd\u00be\7.\2\2\u00be"+
 		"\u00c0\7\62\2\2\u00bf\u00c1\5\26\f\2\u00c0\u00bf\3\2\2\2\u00c1\u00c2\3"+
 		"\2\2\2\u00c2\u00c0\3\2\2\2\u00c2\u00c3\3\2\2\2\u00c3\u00c4\3\2\2\2\u00c4"+
 		"\u00c5\7\61\2\2\u00c5\33\3\2\2\2\u00c6\u00c7\t\2\2\2\u00c7\35\3\2\2\2"+
-		"\u00c8\u00c9\b\20\1\2\u00c9\u00cd\5 \21\2\u00ca\u00cb\7\33\2\2\u00cb\u00cd"+
+		"\u00c8\u00c9\b\20\1\2\u00c9\u00cd\5 \21\2\u00ca\u00cb\7\32\2\2\u00cb\u00cd"+
 		"\5\36\20\5\u00cc\u00c8\3\2\2\2\u00cc\u00ca\3\2\2\2\u00cd\u00d9\3\2\2\2"+
 		"\u00ce\u00cf\f\4\2\2\u00cf\u00d0\t\3\2\2\u00d0\u00d8\5\36\20\5\u00d1\u00d2"+
 		"\f\3\2\2\u00d2\u00d3\7\20\2\2\u00d3\u00d4\5\36\20\2\u00d4\u00d5\7\22\2"+
 		"\2\u00d5\u00d6\5\36\20\4\u00d6\u00d8\3\2\2\2\u00d7\u00ce\3\2\2\2\u00d7"+
 		"\u00d1\3\2\2\2\u00d8\u00db\3\2\2\2\u00d9\u00d7\3\2\2\2\u00d9\u00da\3\2"+
 		"\2\2\u00da\37\3\2\2\2\u00db\u00d9\3\2\2\2\u00dc\u00dd\b\21\1\2\u00dd\u00ff"+
-		"\7+\2\2\u00de\u00ff\5\34\17\2\u00df\u00e8\7\13\2\2\u00e0\u00e5\5\36\20"+
+		"\7*\2\2\u00de\u00ff\5\34\17\2\u00df\u00e8\7\13\2\2\u00e0\u00e5\5\36\20"+
 		"\2\u00e1\u00e2\7\t\2\2\u00e2\u00e4\5\36\20\2\u00e3\u00e1\3\2\2\2\u00e4"+
 		"\u00e7\3\2\2\2\u00e5\u00e3\3\2\2\2\u00e5\u00e6\3\2\2\2\u00e6\u00e9\3\2"+
 		"\2\2\u00e7\u00e5\3\2\2\2\u00e8\u00e0\3\2\2\2\u00e8\u00e9\3\2\2\2\u00e9"+
 		"\u00ea\3\2\2\2\u00ea\u00ff\7\f\2\2\u00eb\u00ec\7\4\2\2\u00ec\u00ed\5\36"+
-		"\20\2\u00ed\u00ee\7\5\2\2\u00ee\u00ff\3\2\2\2\u00ef\u00f0\7+\2\2\u00f0"+
+		"\20\2\u00ed\u00ee\7\5\2\2\u00ee\u00ff\3\2\2\2\u00ef\u00f0\7*\2\2\u00f0"+
 		"\u00f9\7\4\2\2\u00f1\u00f6\5\36\20\2\u00f2\u00f3\7\t\2\2\u00f3\u00f5\5"+
 		"\36\20\2\u00f4\u00f2\3\2\2\2\u00f5\u00f8\3\2\2\2\u00f6\u00f4\3\2\2\2\u00f6"+
 		"\u00f7\3\2\2\2\u00f7\u00fa\3\2\2\2\u00f8\u00f6\3\2\2\2\u00f9\u00f1\3\2"+
 		"\2\2\u00f9\u00fa\3\2\2\2\u00fa\u00fb\3\2\2\2\u00fb\u00ff\7\5\2\2\u00fc"+
-		"\u00fd\7\37\2\2\u00fd\u00ff\5 \21\3\u00fe\u00dc\3\2\2\2\u00fe\u00de\3"+
+		"\u00fd\7\36\2\2\u00fd\u00ff\5 \21\3\u00fe\u00dc\3\2\2\2\u00fe\u00de\3"+
 		"\2\2\2\u00fe\u00df\3\2\2\2\u00fe\u00eb\3\2\2\2\u00fe\u00ef\3\2\2\2\u00fe"+
 		"\u00fc\3\2\2\2\u00ff\u011d\3\2\2\2\u0100\u0101\f\4\2\2\u0101\u0102\5\""+
 		"\22\2\u0102\u0103\5 \21\5\u0103\u011c\3\2\2\2\u0104\u0105\f\b\2\2\u0105"+
-		"\u0106\7\36\2\2\u0106\u011c\7+\2\2\u0107\u0108\f\7\2\2\u0108\u0109\7\13"+
+		"\u0106\7\35\2\2\u0106\u011c\7*\2\2\u0107\u0108\f\7\2\2\u0108\u0109\7\13"+
 		"\2\2\u0109\u010a\5\36\20\2\u010a\u010b\7\f\2\2\u010b\u011c\3\2\2\2\u010c"+
-		"\u010d\f\6\2\2\u010d\u010e\7\36\2\2\u010e\u010f\7+\2\2\u010f\u0118\7\4"+
+		"\u010d\f\6\2\2\u010d\u010e\7\35\2\2\u010e\u010f\7*\2\2\u010f\u0118\7\4"+
 		"\2\2\u0110\u0115\5\36\20\2\u0111\u0112\7\t\2\2\u0112\u0114\5\36\20\2\u0113"+
 		"\u0111\3\2\2\2\u0114\u0117\3\2\2\2\u0115\u0113\3\2\2\2\u0115\u0116\3\2"+
 		"\2\2\u0116\u0119\3\2\2\2\u0117\u0115\3\2\2\2\u0118\u0110\3\2\2\2\u0118"+
@@ -1962,7 +1963,7 @@ public class chocogrammarParser extends Parser {
 		"\2\2\u011b\u0104\3\2\2\2\u011b\u0107\3\2\2\2\u011b\u010c\3\2\2\2\u011c"+
 		"\u011f\3\2\2\2\u011d\u011b\3\2\2\2\u011d\u011e\3\2\2\2\u011e!\3\2\2\2"+
 		"\u011f\u011d\3\2\2\2\u0120\u0121\t\4\2\2\u0121#\3\2\2\2\u0122\u012d\7"+
-		"+\2\2\u0123\u0124\5 \21\2\u0124\u0125\7\36\2\2\u0125\u0126\7+\2\2\u0126"+
+		"*\2\2\u0123\u0124\5 \21\2\u0124\u0125\7\35\2\2\u0125\u0126\7*\2\2\u0126"+
 		"\u012d\3\2\2\2\u0127\u0128\5 \21\2\u0128\u0129\7\13\2\2\u0129\u012a\5"+
 		"\36\20\2\u012a\u012b\7\f\2\2\u012b\u012d\3\2\2\2\u012c\u0122\3\2\2\2\u012c"+
 		"\u0123\3\2\2\2\u012c\u0127\3\2\2\2\u012d%\3\2\2\2#)+\61CEGQTYegmy\u0096"+

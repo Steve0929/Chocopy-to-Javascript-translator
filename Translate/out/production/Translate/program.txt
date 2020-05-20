@@ -1,2 +1,1 @@
-def abc():
-    return 0
+i:int = 8

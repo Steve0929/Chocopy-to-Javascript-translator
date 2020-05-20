@@ -18,7 +18,7 @@ public class Maintest {
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             chocogrammarParser parser = new chocogrammarParser(tokens);
             ParseTree tree = parser.program();
-
+            System.out.println(tree.toStringTree(parser));
         }
        catch(Exception e){
            System.err.println("Error: "+e);

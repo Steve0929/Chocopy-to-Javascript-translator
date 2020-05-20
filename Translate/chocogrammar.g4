@@ -3,7 +3,7 @@
  ******************************************************/
 grammar chocogrammar;
 
-program: (var_def | func_def | class_def)* stmt*;
+program: (var_def | func_def | class_def)* stmt* ;
 
 class_def: 'class' ID '(' ID ')' ':' NEWLINE INDENT class_body DEDENT;
 
@@ -23,6 +23,7 @@ global_decl : 'global' ID NEWLINE;
 nonlocal_decl : 'nonlocal' ID NEWLINE;
 
 var_def : typed_var '=' literal NEWLINE;
+
 stmt : simple_stmt NEWLINE
         | 'if' expr ':' block ('elif' expr ':' block)* ('else' ':' block)?
         | 'while' expr ':' block
@@ -39,7 +40,7 @@ block : NEWLINE INDENT stmt+ DEDENT ;
 literal: 'None'
         | 'True'
         | 'False'
-        | 'INTEGER'
+        | INTEGER
         | IDSTRING | STRING
 ;
 
@@ -70,11 +71,14 @@ target : ID
 
 // some lexer rules
 ID:         [a-zA-Z][a-zA-Z0-9_]* ;
-IDSTRING:   '"'[a-zA-Z][a-zA-Z0-9_]*'"' ;
+IDSTRING:   [a-zA-Z][a-zA-Z0-9_]* ;
 STRING:     '"'[a-zA-Z0-9_]*'"' ;
-INT :       [0-9]+ ; // match integers
+INTEGER:    [0-9]+ ; // match integers
 NEWLINE:    '\r'? '\n' ; // return newlines to parser
 COMMENT:    '#' ~[\r\n]* -> skip ;
+
+//skip spaces
+WhiteSpace : (' '|'\t') -> skip;
 
 // Following two lexer rules are imaginary, condition is never meet ... they are here just to suppress warnings
 DEDENT:   ('\n');
