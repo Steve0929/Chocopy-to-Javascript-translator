@@ -1,5 +1,5 @@
 # Chocopy-to-Javascript-translator
-##Chocopy to Javascript translator using ANTLR
+## Chocopy to Javascript translator using ANTLR
 
 Project for the Programming languages class at Universidad Nacional de Colombia.
 
