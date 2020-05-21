@@ -76,11 +76,53 @@ public interface chocogrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStmt(chocogrammarParser.StmtContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link chocogrammarParser#if_expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIf_expr(chocogrammarParser.If_exprContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link chocogrammarParser#while_expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWhile_expr(chocogrammarParser.While_exprContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link chocogrammarParser#for_expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFor_expr(chocogrammarParser.For_exprContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link chocogrammarParser#simple_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitSimple_stmt(chocogrammarParser.Simple_stmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link chocogrammarParser#asig_stmt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAsig_stmt(chocogrammarParser.Asig_stmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link chocogrammarParser#pass}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPass(chocogrammarParser.PassContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link chocogrammarParser#return_st}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitReturn_st(chocogrammarParser.Return_stContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link chocogrammarParser#print}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrint(chocogrammarParser.PrintContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link chocogrammarParser#block}.
 	 * @param ctx the parse tree
@@ -99,6 +141,12 @@ public interface chocogrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitExpr(chocogrammarParser.ExprContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link chocogrammarParser#not_expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNot_expr(chocogrammarParser.Not_exprContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link chocogrammarParser#cexpr}.
 	 * @param ctx the parse tree
