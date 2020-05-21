@@ -1,1 +1,3 @@
 i:int = 8
+flag:bool = False
+def contains(items:[int], x:int) -> bool:
