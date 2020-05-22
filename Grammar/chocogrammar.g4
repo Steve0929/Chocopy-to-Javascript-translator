@@ -131,13 +131,11 @@ simple_stmt : pass
     | expr
     | return_st
     | asig_stmt
-    | print
     ;
 asig_stmt: (target TK_ASIG)+ expr;
 
 pass: 'pass';
 return_st: 'return' expr? ;
-print : 'print' TK_PAR_IZQ expr TK_PAR_DER;
 
 block : NEWLINE INDENT stmt+ DEDENT  ;
 
@@ -152,8 +150,6 @@ expr : cexpr
     | not_expr
     | expr (AND | OR) expr
     | expr IF expr ELSE expr
-    | LEN TK_PAR_IZQ expr TK_PAR_DER
-    | INPUT TK_PAR_IZQ TK_PAR_DER
     ;
 
 not_expr: NOT expr;
@@ -198,8 +194,6 @@ OR : 'or';
 IF : 'if';
 ELSE : 'else';
 ELIF : 'elif';
-LEN : 'len';
-INPUT : 'input';
 TK_PAR_IZQ : '(';
 TK_PAR_DER : ')';
 TK_COR_IZQ : '[';
@@ -211,7 +205,7 @@ TK_ASIG: '=';
 
 // some lexer rules
 ID:         [a-zA-Z][a-zA-Z0-9_]* ;
-IDSTRING:   [a-zA-Z][a-zA-Z0-9_]* ;
+IDSTRING:   '"'[a-zA-Z][a-zA-Z0-9_]*'"' ;
 //STRING:   '"'[a-zA-Z0-9_]*'"' ;
 STRING:     '"' ('\\' ["\\] | ~["\\\r\n])* '"';
 INTEGER:    [0-9]+ ; // match integers

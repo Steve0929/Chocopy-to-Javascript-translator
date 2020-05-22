@@ -1,4 +1,4 @@
-// Generated from D:/Documents/Tareas/NOVENA_MATRICULA/Lenguajes_de_programacion/Practicas/Chocopy-to-Javascript-translator/Translate/Grammar\chocogrammar.g4 by ANTLR 4.8
+// Generated from D:/Documents/Tareas/NOVENA_MATRICULA/Lenguajes_de_programacion/Practicas/Chocopy-to-Javascript-translator/Grammar\chocogrammar.g4 by ANTLR 4.8
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -186,16 +186,6 @@ public interface chocogrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitReturn_st(chocogrammarParser.Return_stContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link chocogrammarParser#print}.
-	 * @param ctx the parse tree
-	 */
-	void enterPrint(chocogrammarParser.PrintContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link chocogrammarParser#print}.
-	 * @param ctx the parse tree
-	 */
-	void exitPrint(chocogrammarParser.PrintContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link chocogrammarParser#block}.
 	 * @param ctx the parse tree

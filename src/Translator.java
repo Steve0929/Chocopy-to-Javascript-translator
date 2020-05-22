@@ -63,16 +63,16 @@ public class Translator extends chocogrammarBaseListener{
         System.out.println();
     }
 
+    /*
     @Override
     public void enterPrint(chocogrammarParser.PrintContext ctx) {
         System.out.print("console.log("+ctx.expr().getText());
     }
-
     @Override
     public void exitPrint(chocogrammarParser.PrintContext ctx) {
         System.out.print(");");
     }
-
+*/
     @Override
     public void enterExpr(chocogrammarParser.ExprContext ctx) {
 

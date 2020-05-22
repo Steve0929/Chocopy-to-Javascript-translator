@@ -1,4 +1,4 @@
-// Generated from D:/Documents/Tareas/NOVENA_MATRICULA/Lenguajes_de_programacion/Practicas/Chocopy-to-Javascript-translator/Translate/Grammar\chocogrammar.g4 by ANTLR 4.8
+// Generated from D:/Documents/Tareas/NOVENA_MATRICULA/Lenguajes_de_programacion/Practicas/Chocopy-to-Javascript-translator/Grammar\chocogrammar.g4 by ANTLR 4.8
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -226,18 +226,6 @@ public class chocogrammarBaseListener implements chocogrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitReturn_st(chocogrammarParser.Return_stContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterPrint(chocogrammarParser.PrintContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPrint(chocogrammarParser.PrintContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
