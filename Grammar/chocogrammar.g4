@@ -95,25 +95,25 @@ tokens { INDENT, DEDENT }
 
 program : (var_def | func_def | class_def )* stmt*;
 
-class_def : 'class' ID TK_PAR_IZQ ID TK_PAR_DER ':' NEWLINE INDENT class_body DEDENT;
+class_def : CLASS ID TK_PAR_IZQ ID TK_PAR_DER TK_DOS_PUNTOS NEWLINE INDENT class_body DEDENT;
 
-class_body : 'pass' NEWLINE
+class_body : PASS NEWLINE
              | (var_def | func_def)+
              ;
 
-func_def : 'def' ID TK_PAR_IZQ (typed_var (TK_COMMA typed_var)*)? TK_PAR_DER ('->' type)? ':' NEWLINE INDENT func_body DEDENT;
+func_def : DEF ID TK_PAR_IZQ (typed_var (TK_COMMA typed_var)*)? TK_PAR_DER ('->' type)? ':' NEWLINE INDENT func_body DEDENT;
 
 func_body : (global_decl | nonlocal_decl | var_def | func_def )* stmt+;
 
-typed_var : ID ':' type;
+typed_var : ID TK_DOS_PUNTOS type;
 
 type : ID
     | IDSTRING
     | TK_COR_IZQ type TK_COR_DER;
 
-global_decl : 'global' ID NEWLINE;
+global_decl : GLOBAL ID NEWLINE;
 
-nonlocal_decl : 'nonlocal' ID NEWLINE;
+nonlocal_decl : NONLOCAL ID NEWLINE;
 
 var_def : typed_var TK_ASIG literal NEWLINE;
 
@@ -123,25 +123,24 @@ stmt : simple_stmt NEWLINE
     | for_expr
     ;
 
-if_expr: IF expr ':' block (ELIF expr ':' block )* (ELSE ':' block)?  ;
-while_expr: 'while' expr ':' block ;
-for_expr: 'for' ID 'in' expr ':' block ;
+if_expr: IF expr TK_DOS_PUNTOS block (ELIF expr TK_DOS_PUNTOS block )* (ELSE TK_DOS_PUNTOS block)?  ;
+while_expr: WHILE expr TK_DOS_PUNTOS block ;
+for_expr: FOR ID IN expr TK_DOS_PUNTOS block ;
 
-simple_stmt : pass
+simple_stmt : PASS
     | expr
     | return_st
     | asig_stmt
     ;
 asig_stmt: (target TK_ASIG)+ expr;
 
-pass: 'pass';
-return_st: 'return' expr? ;
+return_st: RETURN expr? ;
 
 block : NEWLINE INDENT stmt+ DEDENT  ;
 
-literal : 'None'
-    | 'True'
-    | 'False'
+literal : NONE
+    | TRUE
+    | FALSE
     | INTEGER
     | IDSTRING
     | STRING;
@@ -168,18 +167,18 @@ cexpr : ID
     | TK_MENOS cexpr
     ;
 
-bin_op : '+'
+bin_op : TK_MAS
     | TK_MENOS
-    | '*'
-    | '//'
-    | '%'
-    | '=='
-    | '!='
-    | '<='
-    | '>='
-    | '<'
-    | '>'
-    | 'is'
+    | TK_POR
+    | TK_DIV
+    | TK_MOD
+    | TK_COMP
+    | TK_DIF
+    | TK_MENOR_IG
+    | TK_MAYOR_IG
+    | TK_MENOR
+    | TK_MAYOR
+    | TK_IS
     ;
 
 target : ID
@@ -202,6 +201,30 @@ TK_MENOS : '-';
 TK_COMMA : ',';
 TK_PUNTO : '.';
 TK_ASIG: '=';
+CLASS : 'class';
+TK_DOS_PUNTOS: ':';
+PASS: 'pass';
+DEF : 'def';
+GLOBAL: 'global';
+NONLOCAL: 'nonlocal';
+WHILE: 'while';
+FOR: 'for';
+IN: 'in';
+NONE: 'None';
+TRUE: 'True';
+FALSE: 'False';
+TK_MAS: '+';
+TK_POR: '*';
+TK_DIV: '//';
+TK_MOD: '%';
+TK_COMP:'==';
+TK_DIF: '!=';
+TK_MENOR_IG: '<=';
+TK_MAYOR_IG: '>=';
+TK_MENOR: '<';
+TK_MAYOR:'>';
+TK_IS: 'is';
+RETURN:'return';
 
 // some lexer rules
 ID:         [a-zA-Z][a-zA-Z0-9_]* ;

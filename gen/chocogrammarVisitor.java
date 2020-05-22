@@ -106,12 +106,6 @@ public interface chocogrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAsig_stmt(chocogrammarParser.Asig_stmtContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link chocogrammarParser#pass}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPass(chocogrammarParser.PassContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link chocogrammarParser#return_st}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

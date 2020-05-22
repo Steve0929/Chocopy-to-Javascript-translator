@@ -167,16 +167,6 @@ public interface chocogrammarListener extends ParseTreeListener {
 	 */
 	void exitAsig_stmt(chocogrammarParser.Asig_stmtContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link chocogrammarParser#pass}.
-	 * @param ctx the parse tree
-	 */
-	void enterPass(chocogrammarParser.PassContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link chocogrammarParser#pass}.
-	 * @param ctx the parse tree
-	 */
-	void exitPass(chocogrammarParser.PassContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link chocogrammarParser#return_st}.
 	 * @param ctx the parse tree
 	 */

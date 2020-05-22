@@ -207,18 +207,6 @@ public class chocogrammarBaseListener implements chocogrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPass(chocogrammarParser.PassContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPass(chocogrammarParser.PassContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterReturn_st(chocogrammarParser.Return_stContext ctx) { }
 	/**
 	 * {@inheritDoc}
