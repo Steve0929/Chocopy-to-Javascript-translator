@@ -26,7 +26,7 @@ public class Maintest {
             //Create generic parse tree walker
             ParseTreeWalker walker = new ParseTreeWalker();
             //Walk the tree
-            walker.walk(new Sublistener(), tree);
+            walker.walk(new Translator(), tree);
             System.out.println();//print ln after translation
         }
        catch(Exception e){

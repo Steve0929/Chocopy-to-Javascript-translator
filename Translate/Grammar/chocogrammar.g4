@@ -213,7 +213,7 @@ TK_ASIG: '=';
 ID:         [a-zA-Z][a-zA-Z0-9_]* ;
 IDSTRING:   [a-zA-Z][a-zA-Z0-9_]* ;
 //STRING:   '"'[a-zA-Z0-9_]*'"' ;
-STRING:     '"'.'"';
+STRING:     '"' ('\\' ["\\] | ~["\\\r\n])* '"';
 INTEGER:    [0-9]+ ; // match integers
 
 
