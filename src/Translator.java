@@ -108,6 +108,14 @@ public class Translator extends chocogrammarBaseListener{
 
     }
     @Override
+    public void enterFor_expr(chocogrammarParser.For_exprContext ctx){
+        System.out.println("for( "+ctx.ID()+" = 0; "+ctx.ID()+" <= "+visitor.visitExpr(ctx.expr())+"; "+ctx.ID()+"++ ){");
+    }
+    @Override
+    public void exitFor_expr(chocogrammarParser.For_exprContext ctx){
+        System.out.println("}");
+    }
+    @Override
     public void enterIf_expr(chocogrammarParser.If_exprContext ctx) {
         if(ctx.getChild(1).getText().charAt(0)=='(') //if it has ( dont put another one
             System.out.print( "if"+ visitor.visitExpr(ctx.expr()) + "{" );
@@ -148,12 +156,13 @@ public class Translator extends chocogrammarBaseListener{
 
     @Override
     public void enterWhile_expr(chocogrammarParser.While_exprContext ctx) {
-        super.enterWhile_expr(ctx);
+        //super.enterWhile_expr(ctx);
+        System.out.println("while ("+visitor.visitExpr(ctx.expr())+"){");
     }
 
     @Override
     public void exitWhile_expr(chocogrammarParser.While_exprContext ctx) {
-        super.exitWhile_expr(ctx);
+        System.out.println("}");
     }
 
     @Override
