@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Chocopy-to-Javascript-translator.iml" filepath="$PROJECT_DIR$/.idea/Chocopy-to-Javascript-translator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Chocopy-to-Javascript-translator.iml" filepath="$PROJECT_DIR$/Chocopy-to-Javascript-translator.iml" />
     </modules>
   </component>
 </project>
