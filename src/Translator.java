@@ -1,3 +1,7 @@
+import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.tree.ErrorNode;
+import org.antlr.v4.runtime.tree.TerminalNode;
+
 public class Translator extends chocogrammarBaseListener{
 
     @Override
@@ -68,11 +72,13 @@ public class Translator extends chocogrammarBaseListener{
     public void enterPrint(chocogrammarParser.PrintContext ctx) {
         System.out.print("console.log("+ctx.expr().getText());
     }
+
     @Override
     public void exitPrint(chocogrammarParser.PrintContext ctx) {
         System.out.print(");");
     }
-*/
+    */
+
     @Override
     public void enterExpr(chocogrammarParser.ExprContext ctx) {
 
@@ -100,4 +106,3 @@ public class Translator extends chocogrammarBaseListener{
 
 
 }
-

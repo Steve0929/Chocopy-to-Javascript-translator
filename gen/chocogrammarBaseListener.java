@@ -279,6 +279,18 @@ public class chocogrammarBaseListener implements chocogrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterPrint(chocogrammarParser.PrintContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPrint(chocogrammarParser.PrintContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterBin_op(chocogrammarParser.Bin_opContext ctx) { }
 	/**
 	 * {@inheritDoc}

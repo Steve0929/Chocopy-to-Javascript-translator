@@ -100,8 +100,7 @@ class_def : CLASS ID TK_PAR_IZQ ID TK_PAR_DER TK_DOS_PUNTOS NEWLINE INDENT class
 class_body : PASS NEWLINE
              | (var_def | func_def)+
              ;
-
-func_def : DEF ID TK_PAR_IZQ (typed_var (TK_COMMA typed_var)*)? TK_PAR_DER ('->' type)? ':' NEWLINE INDENT func_body DEDENT;
+func_def : DEF ID TK_PAR_IZQ (typed_var (TK_COMMA typed_var)*)? TK_PAR_DER (TK_FUNC_TYPE type)? ':' NEWLINE INDENT func_body DEDENT;
 
 func_body : (global_decl | nonlocal_decl | var_def | func_def )* stmt+;
 
@@ -163,9 +162,12 @@ cexpr : ID
     | cexpr TK_COR_IZQ expr TK_COR_DER
     | cexpr TK_PUNTO ID TK_PAR_IZQ (expr (TK_COMMA expr)*)? TK_PAR_DER
     | ID TK_PAR_IZQ (expr (TK_COMMA expr)*)? TK_PAR_DER
+    |print
     | cexpr bin_op cexpr
     | TK_MENOS cexpr
     ;
+
+print : PRINT TK_PAR_IZQ expr TK_PAR_DER;
 
 bin_op : TK_MAS
     | TK_MENOS
@@ -225,7 +227,8 @@ TK_MENOR: '<';
 TK_MAYOR:'>';
 TK_IS: 'is';
 RETURN:'return';
-
+TK_FUNC_TYPE: '->';
+PRINT: 'print';
 // some lexer rules
 ID:         [a-zA-Z][a-zA-Z0-9_]* ;
 IDSTRING:   '"'[a-zA-Z][a-zA-Z0-9_]*'"' ;
@@ -235,7 +238,7 @@ INTEGER:    [0-9]+ ; // match integers
 
 
 //Python official grammar
-LINE_COMMENT 	: '#' ~[\r\n]* -> skip ;
+LINE_COMMENT 	: '#' ~[\r\n] -> skip ;
 fragment SPACES
  : [ \t]+
  ;

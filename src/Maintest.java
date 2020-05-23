@@ -21,6 +21,7 @@ public class Maintest {
             //Parser
             chocogrammarParser parser = new chocogrammarParser(tokens);
             ParseTree tree = parser.program();
+            System.out.println(tokens.getTokens());
             System.out.println(tree.toStringTree(parser));
             //Walker
             //Create generic parse tree walker
