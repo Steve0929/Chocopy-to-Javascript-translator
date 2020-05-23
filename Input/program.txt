@@ -4,6 +4,8 @@ i:int = 0
 
 def foo(s: str) -> int:
     return len(s)
+def foo(s: str) -> int:
+   return True
 
 # x**y
 def exp(x: int, y: int) -> int:
@@ -11,7 +13,7 @@ def exp(x: int, y: int) -> int:
 	def f(i: int) -> int:
 		nonlocal a
 		def geta() -> int:
-			return a
+			return a*2
 		if i <= 0:
 			return geta(hello)
 		else:

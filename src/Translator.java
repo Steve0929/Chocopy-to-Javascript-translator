@@ -163,6 +163,8 @@ public class Translator extends chocogrammarBaseListener{
         try {
             if(ctx.expr().cexpr().array_lenght()!=null)
                 System.out.print("return ");
+            else if(ctx.expr().cexpr().literal()!=null)
+                System.out.print("return "+translateLiteral(ctx.expr().getText()));
             else
                 System.out.print("return "+ctx.expr().getText());
             //maybe if print is found there is a semantic error
