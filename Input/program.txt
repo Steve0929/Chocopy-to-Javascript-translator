@@ -1,1 +1,8 @@
-print(True and False)
+if not y:
+    print(len(s))
+
+if(True):
+    print("true")
+list = [1, 2, 3, 4, 5]
+list = []
+
