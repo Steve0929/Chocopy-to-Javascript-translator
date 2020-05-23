@@ -2,11 +2,13 @@ import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
+import java.util.ArrayList;
+
 public class Translator extends chocogrammarBaseListener{
 
     @Override
     public void enterVar_def(chocogrammarParser.Var_defContext ctx) {
-        System.out.print("var "+ctx.typed_var().ID().getText()+" = ");
+        System.out.print("var "+ctx.typed_var().ID().getText()+" = "+translateLiteral(ctx.literal().getText()));
 
     }
 
@@ -17,9 +19,7 @@ public class Translator extends chocogrammarBaseListener{
         //System.out.println(ctx.ID().getText());
     }
 
-    @Override
-    public void enterLiteral(chocogrammarParser.LiteralContext ctx) {
-        String literal = ctx.getText();
+    public String translateLiteral(String literal) {
         switch(literal) {
             case "True":
                 literal = "true";
@@ -35,7 +35,7 @@ public class Translator extends chocogrammarBaseListener{
                 //
                 // code block
         }
-        System.out.print(literal);
+        return literal;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class Translator extends chocogrammarBaseListener{
         System.out.println();
     }
 
-    //Functions
+    //gets arguments of a function
     public String getFunctionArgs(chocogrammarParser.Func_defContext ctx)
     {
         StringBuilder builder = new StringBuilder();
@@ -52,7 +52,14 @@ public class Translator extends chocogrammarBaseListener{
             builder.append(var.ID().getText()).append(", ");
         }
         String arguments = builder.toString();
-        return arguments.substring(0,arguments.length()-2);
+        try {
+            return arguments.substring(0,arguments.length()-2);
+        } catch (Exception e)
+        {
+            //enters if arguments is empty
+            return arguments;
+        }
+
     }
     @Override
     public void enterFunc_def(chocogrammarParser.Func_defContext ctx) {
@@ -79,10 +86,8 @@ public class Translator extends chocogrammarBaseListener{
     @Override
     public void enterPrint(chocogrammarParser.PrintContext ctx) {
         try {
-            if(ctx.expr().cexpr().literal()==null)
-                System.out.print("console.log("+ctx.expr().getText());
-            else
-                System.out.print("console.log(");
+            System.out.print("console.log("+translateLiteral(ctx.expr().getText()));
+
         }catch (Exception e)
         {
             //semantic error, print must have expr.cexpr i think
@@ -91,7 +96,7 @@ public class Translator extends chocogrammarBaseListener{
 
     @Override
     public void exitPrint(chocogrammarParser.PrintContext ctx) {
-        System.out.print(");");
+        System.out.println(");");
     }
 
     @Override
@@ -105,23 +110,56 @@ public class Translator extends chocogrammarBaseListener{
         System.out.println(ctx.getText());
 
     }
-
     @Override
     public void enterIf_expr(chocogrammarParser.If_exprContext ctx) {
         if(ctx.getChild(1).getText().charAt(0)=='(') //if it has ( dont put another one
-            System.out.print( "if"+ ctx.expr(0).getText()+"{" );
+            System.out.print( "if"+ translateLiteral(ctx.expr().getText())+ "{" );
         else
-            System.out.print( "if("+ ctx.expr(0).getText()+") {" );// if it doesnt, put it
+            System.out.print( "if("+ translateLiteral(ctx.expr().getText())+") {" );// if it doesnt, put it
         System.out.println(); //empty line
+
+    }
+
+    @Override
+    public void enterElif_expr(chocogrammarParser.Elif_exprContext ctx) {
+        if(ctx.getChild(1).getText().charAt(0)=='(') //if it has ( dont put another one
+            System.out.print( "}elif"+ translateLiteral(ctx.expr().getText())+"{" );
+        else
+            System.out.print( "}elif("+ translateLiteral(ctx.expr().getText())+") {" );// if it doesnt, put it
+        System.out.println(); //empty line
+    }
+
+    @Override
+    public void exitElif_expr(chocogrammarParser.Elif_exprContext ctx) {
+        System.out.println(); //empty line
+
+    }
+
+    @Override
+    public void enterElse_expr(chocogrammarParser.Else_exprContext ctx) {
+        System.out.println("}else{");
+
+    }
+
+    @Override
+    public void exitElse_expr(chocogrammarParser.Else_exprContext ctx) {
+        super.exitElse_expr(ctx);
     }
 
     @Override public void exitIf_expr(chocogrammarParser.If_exprContext ctx) {
-
         System.out.println(); //empty line
         System.out.println("}");
+
+
     }
 
+    @Override
+    public void enterWhile_expr(chocogrammarParser.While_exprContext ctx) {
+        super.enterWhile_expr(ctx);
+    }
 
-
-
+    @Override
+    public void exitWhile_expr(chocogrammarParser.While_exprContext ctx) {
+        super.exitWhile_expr(ctx);
+    }
 }

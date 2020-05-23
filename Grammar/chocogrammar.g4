@@ -122,7 +122,9 @@ stmt : simple_stmt NEWLINE
     | for_expr
     ;
 
-if_expr: IF expr TK_DOS_PUNTOS block (ELIF expr TK_DOS_PUNTOS block )* (ELSE TK_DOS_PUNTOS block)?  ;
+if_expr: IF expr TK_DOS_PUNTOS block elif_expr* else_expr?  ;
+else_expr:ELSE TK_DOS_PUNTOS block;
+elif_expr: ELIF expr TK_DOS_PUNTOS block;
 while_expr: WHILE expr TK_DOS_PUNTOS block ;
 for_expr: FOR ID IN expr TK_DOS_PUNTOS block ;
 

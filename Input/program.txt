@@ -1,14 +1,30 @@
+d:[int] = None
 i:int = 8
 flag:bool = False
+def noParams() -> bool:
+    j:int = 0
+    print(i)
 def contains(items:[int], x:int) -> bool:
     j:int = 0
     print(i)
-flag = true  #commented
-if(flag == true):
+flag = True  #commented
+if(flag == True):
     print(flag)
     i = i + j
- if flag != true:
-     print(flag)
-     i = i * j
-
+elif(i==6):
+    print("this is a lie")
+elif(i>5):
+    print("adfadf")
+elif(i<4):
+    print("adaa")
+else:
+    print("this is the end")
+if flag != true:
+    print(flag)
+    i = i * j
+d[2]= 5
 print("Item found!")
+if flag == True:
+    print("lol")
+else:
+    print("not stonks")

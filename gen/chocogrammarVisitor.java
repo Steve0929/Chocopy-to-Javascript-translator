@@ -82,6 +82,18 @@ public interface chocogrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIf_expr(chocogrammarParser.If_exprContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link chocogrammarParser#else_expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElse_expr(chocogrammarParser.Else_exprContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link chocogrammarParser#elif_expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElif_expr(chocogrammarParser.Elif_exprContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link chocogrammarParser#while_expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
