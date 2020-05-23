@@ -1,4 +1,4 @@
-public class EvaluateLiteral extends chocogrammarBaseVisitor<String> {
+public class ExpresionsVisitor extends chocogrammarBaseVisitor<String> {
     @Override
     public String visitLiteral(chocogrammarParser.LiteralContext ctx) {
         String literal = ctx.getText();
