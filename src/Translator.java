@@ -67,17 +67,24 @@ public class Translator extends chocogrammarBaseListener{
         System.out.println();
     }
 
-    /*
+
     @Override
     public void enterPrint(chocogrammarParser.PrintContext ctx) {
-        System.out.print("console.log("+ctx.expr().getText());
+        try {
+            if(ctx.expr().cexpr().literal()==null)
+                System.out.print("console.log("+ctx.expr().getText());
+            else
+                System.out.print("console.log(");
+        }catch (Exception e)
+        {
+            //semantic error, print must have expr.cexpr i think
+        }
     }
 
     @Override
     public void exitPrint(chocogrammarParser.PrintContext ctx) {
         System.out.print(");");
     }
-    */
 
     @Override
     public void enterExpr(chocogrammarParser.ExprContext ctx) {
