@@ -4,7 +4,7 @@ def contains(items:[int], x:int) -> bool:
     j:int = 0
     print(i)
 flag = true  #commented
-if(flag == true):
+if (flag == true):
     print(flag)
     i = i + j
  if flag != true:
