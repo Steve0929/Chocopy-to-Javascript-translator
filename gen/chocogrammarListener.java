@@ -127,6 +127,26 @@ public interface chocogrammarListener extends ParseTreeListener {
 	 */
 	void exitIf_expr(chocogrammarParser.If_exprContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link chocogrammarParser#else_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterElse_expr(chocogrammarParser.Else_exprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link chocogrammarParser#else_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitElse_expr(chocogrammarParser.Else_exprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link chocogrammarParser#elif_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterElif_expr(chocogrammarParser.Elif_exprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link chocogrammarParser#elif_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitElif_expr(chocogrammarParser.Elif_exprContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link chocogrammarParser#while_expr}.
 	 * @param ctx the parse tree
 	 */
@@ -226,6 +246,16 @@ public interface chocogrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCexpr(chocogrammarParser.CexprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link chocogrammarParser#array_lenght}.
+	 * @param ctx the parse tree
+	 */
+	void enterArray_lenght(chocogrammarParser.Array_lenghtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link chocogrammarParser#array_lenght}.
+	 * @param ctx the parse tree
+	 */
+	void exitArray_lenght(chocogrammarParser.Array_lenghtContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link chocogrammarParser#print}.
 	 * @param ctx the parse tree

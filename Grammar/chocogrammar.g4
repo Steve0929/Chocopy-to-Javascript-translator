@@ -122,7 +122,9 @@ stmt : simple_stmt NEWLINE
     | for_expr
     ;
 
-if_expr: IF expr TK_DOS_PUNTOS block (ELIF expr TK_DOS_PUNTOS block )* (ELSE TK_DOS_PUNTOS block)?  ;
+if_expr: IF expr TK_DOS_PUNTOS block elif_expr* else_expr?  ;
+else_expr:ELSE TK_DOS_PUNTOS block;
+elif_expr: ELIF expr TK_DOS_PUNTOS block;
 while_expr: WHILE expr TK_DOS_PUNTOS block ;
 for_expr: FOR ID IN expr TK_DOS_PUNTOS block ;
 
@@ -163,10 +165,11 @@ cexpr : ID
     | cexpr TK_PUNTO ID TK_PAR_IZQ (expr (TK_COMMA expr)*)? TK_PAR_DER
     | ID TK_PAR_IZQ (expr (TK_COMMA expr)*)? TK_PAR_DER
     |print
+    |array_lenght
     | cexpr bin_op cexpr
     | TK_MENOS cexpr
     ;
-
+array_lenght: LEN TK_PAR_IZQ expr TK_PAR_DER;
 print : PRINT TK_PAR_IZQ expr TK_PAR_DER;
 
 bin_op : TK_MAS
@@ -229,6 +232,7 @@ TK_IS: 'is';
 RETURN:'return';
 TK_FUNC_TYPE: '->';
 PRINT: 'print';
+LEN:'len';
 // some lexer rules
 ID:         [a-zA-Z][a-zA-Z0-9_]* ;
 IDSTRING:   '"'[a-zA-Z][a-zA-Z0-9_]*'"' ;

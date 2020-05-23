@@ -159,6 +159,30 @@ public class chocogrammarBaseListener implements chocogrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterElse_expr(chocogrammarParser.Else_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitElse_expr(chocogrammarParser.Else_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterElif_expr(chocogrammarParser.Elif_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitElif_expr(chocogrammarParser.Elif_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterWhile_expr(chocogrammarParser.While_exprContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -274,6 +298,18 @@ public class chocogrammarBaseListener implements chocogrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCexpr(chocogrammarParser.CexprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterArray_lenght(chocogrammarParser.Array_lenghtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArray_lenght(chocogrammarParser.Array_lenghtContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
