@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class Translator extends chocogrammarBaseListener{
 
+    private ExpresionsVisitor visitor= new ExpresionsVisitor();
     @Override
     public void enterVar_def(chocogrammarParser.Var_defContext ctx) {
         System.out.print("var "+ctx.typed_var().ID().getText()+" = "+translateLiteral(ctx.literal().getText()));
@@ -86,7 +87,7 @@ public class Translator extends chocogrammarBaseListener{
     @Override
     public void enterPrint(chocogrammarParser.PrintContext ctx) {
         try {
-            System.out.print("console.log("+translateLiteral(ctx.expr().getText()));
+            System.out.print("console.log("+translateLiteral(visitor.visitExpr(ctx.expr())));
 
         }catch (Exception e)
         {
@@ -99,10 +100,6 @@ public class Translator extends chocogrammarBaseListener{
         System.out.println(");");
     }
 
-    @Override
-    public void enterExpr(chocogrammarParser.ExprContext ctx) {
-
-    }
 
     @Override
     public void enterAsig_stmt(chocogrammarParser.Asig_stmtContext ctx) {
@@ -113,9 +110,9 @@ public class Translator extends chocogrammarBaseListener{
     @Override
     public void enterIf_expr(chocogrammarParser.If_exprContext ctx) {
         if(ctx.getChild(1).getText().charAt(0)=='(') //if it has ( dont put another one
-            System.out.print( "if"+ translateLiteral(ctx.expr().getText())+ "{" );
+            System.out.print( "if"+ visitor.visitExpr(ctx.expr()) + "{" );
         else
-            System.out.print( "if("+ translateLiteral(ctx.expr().getText())+") {" );// if it doesnt, put it
+            System.out.print( "if("+ visitor.visitExpr(ctx.expr())+") {" );// if it doesnt, put it
         System.out.println(); //empty line
 
     }
@@ -123,9 +120,9 @@ public class Translator extends chocogrammarBaseListener{
     @Override
     public void enterElif_expr(chocogrammarParser.Elif_exprContext ctx) {
         if(ctx.getChild(1).getText().charAt(0)=='(') //if it has ( dont put another one
-            System.out.print( "}else if"+ translateLiteral(ctx.expr().getText())+"{" );
+            System.out.print( "}else if"+ visitor.visitExpr(ctx.expr())+"{" );
         else
-            System.out.print( "}else if("+ translateLiteral(ctx.expr().getText())+") {" );// if it doesnt, put it
+            System.out.print( "}else if("+ visitor.visitExpr(ctx.expr())+") {" );// if it doesnt, put it
         System.out.println(); //empty line
     }
 
@@ -137,6 +134,7 @@ public class Translator extends chocogrammarBaseListener{
 
     @Override
     public void enterElse_expr(chocogrammarParser.Else_exprContext ctx) {
+        System.out.println();
         System.out.println("}else{");
 
     }
@@ -160,23 +158,22 @@ public class Translator extends chocogrammarBaseListener{
 
     @Override
     public void enterReturn_st(chocogrammarParser.Return_stContext ctx) {
-        try {
-            if(ctx.expr().cexpr().array_lenght()!=null)
-                System.out.print("return ");
-            else if(ctx.expr().cexpr().literal()!=null)
-                System.out.print("return "+translateLiteral(ctx.expr().getText()));
+            if(ctx.expr()!=null)
+            {
+
+                System.out.print("return "+visitor.visitExpr(ctx.expr()));
+            }
             else
-                System.out.print("return "+ctx.expr().getText());
+                System.out.print("return ");
+
             //maybe if print is found there is a semantic error
-        }catch (Exception e)
-        {
-            System.out.print("return "+ctx.expr().getText());
-        }
 
     }
 
-    @Override
+   /*@Override
     public void enterArray_lenght(chocogrammarParser.Array_lenghtContext ctx) {
         System.out.println(ctx.expr().getText()+".length");
     }
+
+    */
 }

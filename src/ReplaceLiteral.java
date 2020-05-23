@@ -10,7 +10,7 @@ public class ReplaceLiteral extends chocogrammarBaseListener{
 
     @Override
     public void enterLiteral(chocogrammarParser.LiteralContext ctx) {
-        rewriter.replace(ctx.start,ctx.stop,new EvaluateLiteral().visit(ctx));
+        rewriter.replace(ctx.start,ctx.stop,new ExpresionsVisitor().visit(ctx));
         System.out.println(ctx.getText());
     }
     public String getReplacedCode() {
