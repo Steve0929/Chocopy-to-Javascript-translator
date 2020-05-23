@@ -134,6 +134,7 @@ public class Translator extends chocogrammarBaseListener{
 
     @Override
     public void enterElse_expr(chocogrammarParser.Else_exprContext ctx) {
+        System.out.println();
         System.out.println("}else{");
 
     }
@@ -157,8 +158,13 @@ public class Translator extends chocogrammarBaseListener{
 
     @Override
     public void enterReturn_st(chocogrammarParser.Return_stContext ctx) {
+            if(ctx.expr()!=null)
+            {
 
-            System.out.print("return "+visitor.visitExpr(ctx.expr()));
+                System.out.print("return "+visitor.visitExpr(ctx.expr()));
+            }
+            else
+                System.out.print("return ");
 
             //maybe if print is found there is a semantic error
 

@@ -18,6 +18,7 @@ public class ExpresionsVisitor extends chocogrammarBaseVisitor<String> {
         StringBuilder builder= new StringBuilder();
         if(ctx.cexpr()!=null)
         {
+
             builder.append(visitCexpr(ctx.cexpr()));
         }else if(ctx.not_expr()!=null)
         {
@@ -54,6 +55,24 @@ public class ExpresionsVisitor extends chocogrammarBaseVisitor<String> {
             //TK_PAR_IZQ expr TK_PAR_DER
             return builder.append("(").append(visitExpr(ctx.expr(0))).append(")").toString();
         }
+        if(ctx.cexpr()!=null && ctx.TK_PUNTO()!=null && ctx.TK_PAR_IZQ()==null)
+        {
+            //cexpr TK_PUNTO ID
+            return builder.append(visitCexpr(ctx.cexpr(0))).append(".").append(ctx.ID().getText()).toString();
+        }
+        if(ctx.cexpr()!=null && ctx.TK_COR_IZQ()!=null)
+        {
+            //cexpr TK_COR_IZQ expr TK_COR_DER
+            return builder.append(visitCexpr(ctx.cexpr(0))).append("[").
+                    append(visitCexpr(ctx.cexpr(1))).append("]").toString();
+        }
+        if(ctx.cexpr()!=null && ctx.TK_PUNTO()!=null && ctx.TK_PAR_IZQ()!=null)
+        {
+            //cexpr TK_PUNTO ID TK_PAR_IZQ (expr (TK_COMMA expr)*)? TK_PAR_DER
+            return builder.append(visitCexpr(ctx.cexpr(0))).append(".").
+                    append(ctx.ID().getText()).append("(").append(getListElements(ctx))
+                    .append(")").toString();
+        }
         if(ctx.array_lenght()!=null)
         {
             return  visitArray_lenght(ctx.array_lenght());
@@ -63,7 +82,24 @@ public class ExpresionsVisitor extends chocogrammarBaseVisitor<String> {
             return visitPrint(ctx.print());
             //semantic error i think
         }
-        return "";
+        if(ctx.ID()!=null && ctx.TK_PAR_IZQ()!=null)
+        {
+            //ID TK_PAR_IZQ (expr (TK_COMMA expr)*)? TK_PAR_DER
+            return builder.append(ctx.ID().getText()).append("(").append(getListElements(ctx))
+                    .append(")").toString();
+        }
+        if(ctx.bin_op()!=null)
+        {
+            //cexpr bin_op cexpr
+            return builder.append(visitCexpr(ctx.cexpr(0))).append(" ").
+                    append(ctx.bin_op().getText()).append(" ").append(visitCexpr(ctx.cexpr(1))).toString();
+        }
+        else if(ctx.TK_MENOS()!=null)
+        {
+            return builder.append("- ").append(visitCexpr(ctx.cexpr(0))).toString();
+        }
+        else
+            return "";
     }
 
     @Override
