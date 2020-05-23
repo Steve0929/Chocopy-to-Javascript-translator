@@ -7,5 +7,8 @@ flag = true  #commented
 if(flag == true):
     print(flag)
     i = i + j
+ if flag != true:
+     print(flag)
+     i = i * j
 
 print("Item found!")

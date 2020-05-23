@@ -100,11 +100,15 @@ public class Translator extends chocogrammarBaseListener{
 
     @Override
     public void enterIf_expr(chocogrammarParser.If_exprContext ctx) {
-        System.out.print( "if"+ ctx.expr(0).getText()+"{" );
+        if(ctx.getChild(1).getText().charAt(0)=='(') //if it has ( dont put another one
+            System.out.print( "if"+ ctx.expr(0).getText()+"{" );
+        else
+            System.out.print( "if("+ ctx.expr(0).getText()+") {" );// if it doesnt, put it
         System.out.println(); //empty line
     }
 
     @Override public void exitIf_expr(chocogrammarParser.If_exprContext ctx) {
+
         System.out.println(); //empty line
         System.out.println("}");
     }
