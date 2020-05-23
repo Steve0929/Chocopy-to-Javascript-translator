@@ -123,9 +123,9 @@ public class Translator extends chocogrammarBaseListener{
     @Override
     public void enterElif_expr(chocogrammarParser.Elif_exprContext ctx) {
         if(ctx.getChild(1).getText().charAt(0)=='(') //if it has ( dont put another one
-            System.out.print( "}elif"+ translateLiteral(ctx.expr().getText())+"{" );
+            System.out.print( "}else if"+ translateLiteral(ctx.expr().getText())+"{" );
         else
-            System.out.print( "}elif("+ translateLiteral(ctx.expr().getText())+") {" );// if it doesnt, put it
+            System.out.print( "}else if("+ translateLiteral(ctx.expr().getText())+") {" );// if it doesnt, put it
         System.out.println(); //empty line
     }
 
@@ -161,5 +161,18 @@ public class Translator extends chocogrammarBaseListener{
     @Override
     public void exitWhile_expr(chocogrammarParser.While_exprContext ctx) {
         super.exitWhile_expr(ctx);
+    }
+
+    @Override
+    public void enterSimple_stmt(chocogrammarParser.Simple_stmtContext ctx) {
+        if(ctx.PASS()!=null)
+        {
+            System.out.println();
+        }
+    }
+
+    @Override
+    public void exitSimple_stmt(chocogrammarParser.Simple_stmtContext ctx) {
+        super.exitSimple_stmt(ctx);
     }
 }
