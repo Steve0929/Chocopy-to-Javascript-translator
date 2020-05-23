@@ -247,6 +247,16 @@ public interface chocogrammarListener extends ParseTreeListener {
 	 */
 	void exitCexpr(chocogrammarParser.CexprContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link chocogrammarParser#array_lenght}.
+	 * @param ctx the parse tree
+	 */
+	void enterArray_lenght(chocogrammarParser.Array_lenghtContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link chocogrammarParser#array_lenght}.
+	 * @param ctx the parse tree
+	 */
+	void exitArray_lenght(chocogrammarParser.Array_lenghtContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link chocogrammarParser#print}.
 	 * @param ctx the parse tree
 	 */

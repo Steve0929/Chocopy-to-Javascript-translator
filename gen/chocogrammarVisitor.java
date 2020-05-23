@@ -154,6 +154,12 @@ public interface chocogrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCexpr(chocogrammarParser.CexprContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link chocogrammarParser#array_lenght}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArray_lenght(chocogrammarParser.Array_lenghtContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link chocogrammarParser#print}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

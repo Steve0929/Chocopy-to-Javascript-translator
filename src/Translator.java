@@ -141,11 +141,6 @@ public class Translator extends chocogrammarBaseListener{
 
     }
 
-    @Override
-    public void exitElse_expr(chocogrammarParser.Else_exprContext ctx) {
-        super.exitElse_expr(ctx);
-    }
-
     @Override public void exitIf_expr(chocogrammarParser.If_exprContext ctx) {
         System.out.println(); //empty line
         System.out.println("}");
@@ -164,15 +159,22 @@ public class Translator extends chocogrammarBaseListener{
     }
 
     @Override
-    public void enterSimple_stmt(chocogrammarParser.Simple_stmtContext ctx) {
-        if(ctx.PASS()!=null)
+    public void enterReturn_st(chocogrammarParser.Return_stContext ctx) {
+        try {
+            if(ctx.expr().cexpr().array_lenght()!=null)
+                System.out.print("return ");
+            else
+                System.out.print("return "+ctx.expr().getText());
+            //maybe if print is found there is a semantic error
+        }catch (Exception e)
         {
-            System.out.println();
+            System.out.print("return "+ctx.expr().getText());
         }
+
     }
 
     @Override
-    public void exitSimple_stmt(chocogrammarParser.Simple_stmtContext ctx) {
-        super.exitSimple_stmt(ctx);
+    public void enterArray_lenght(chocogrammarParser.Array_lenghtContext ctx) {
+        System.out.println(ctx.expr().getText()+".length");
     }
 }

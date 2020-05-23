@@ -303,6 +303,18 @@ public class chocogrammarBaseListener implements chocogrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterArray_lenght(chocogrammarParser.Array_lenghtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArray_lenght(chocogrammarParser.Array_lenghtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterPrint(chocogrammarParser.PrintContext ctx) { }
 	/**
 	 * {@inheritDoc}
