@@ -109,7 +109,7 @@ public class Translator extends chocogrammarBaseListener{
     }
     @Override
     public void enterFor_expr(chocogrammarParser.For_exprContext ctx){
-        System.out.println("for( "+ctx.ID()+" = 0; "+ctx.ID()+" <= "+visitor.visitExpr(ctx.expr())+"; "+ctx.ID()+"++ ){");
+        System.out.println("for( "+ctx.ID()+" on "+visitor.visitExpr(ctx.expr())+" ){");
     }
     @Override
     public void exitFor_expr(chocogrammarParser.For_exprContext ctx){
