@@ -44,11 +44,19 @@ public class Translator extends chocogrammarBaseListener{
     }
 
     //Functions
+    public String getFunctionArgs(chocogrammarParser.Func_defContext ctx)
+    {
+        StringBuilder builder = new StringBuilder();
+        for(chocogrammarParser.Typed_varContext var:ctx.typed_var())
+        {
+            builder.append(var.ID().getText()).append(", ");
+        }
+        String arguments = builder.toString();
+        return arguments.substring(0,arguments.length()-2);
+    }
     @Override
     public void enterFunc_def(chocogrammarParser.Func_defContext ctx) {
-        System.out.print( "function "+ctx.ID().getText()+"("  +")");
-        //System.out.println(ctx.);
-
+        System.out.print( "function "+ctx.ID().getText()+"("+ getFunctionArgs(ctx) +")");
     }
     @Override
     public void exitFunc_def(chocogrammarParser.Func_defContext ctx) {
