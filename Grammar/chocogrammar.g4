@@ -245,7 +245,7 @@ INTEGER:    [0-9]+ ; // match integers
 
 
 //Python official grammar
-LINE_COMMENT 	: '#' ~[\r\n] -> skip ;
+LINE_COMMENT 	: '#' ~[\r\n\f]* -> channel(2) ;
 fragment SPACES
  : [ \t]+
  ;
@@ -255,8 +255,9 @@ fragment COMMENT
  ;
 
 SKIP_
- : ( SPACES | COMMENT  ) -> skip
+ : ( SPACES|COMMENT ) -> skip
  ;
+
 NEWLINE
  : ( {atStartOfInput()}?   SPACES
    | ( '\r'? '\n' | '\r' | '\f' ) SPACES?
