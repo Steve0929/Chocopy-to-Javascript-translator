@@ -8,6 +8,7 @@ public class Translator extends chocogrammarBaseListener{
 
     private ExpresionsVisitor visitor= new ExpresionsVisitor();
 
+
     @Override
     public void enterGlobal_decl(chocogrammarParser.Global_declContext ctx) {
         System.out.println("global."+ctx.ID());
@@ -200,4 +201,6 @@ public class Translator extends chocogrammarBaseListener{
     }
 
     */
+
+
 }

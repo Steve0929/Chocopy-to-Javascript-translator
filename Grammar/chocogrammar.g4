@@ -164,13 +164,15 @@ cexpr : ID
     | cexpr TK_COR_IZQ expr TK_COR_DER
     | cexpr TK_PUNTO ID TK_PAR_IZQ (expr (TK_COMMA expr)*)? TK_PAR_DER
     | ID TK_PAR_IZQ (expr (TK_COMMA expr)*)? TK_PAR_DER
-    |print
-    |array_lenght
+    | print
+    | array_lenght
+    | input
     | cexpr bin_op cexpr
     | TK_MENOS cexpr
     ;
 array_lenght: LEN TK_PAR_IZQ expr TK_PAR_DER;
 print : PRINT TK_PAR_IZQ expr TK_PAR_DER;
+input: INPUT TK_PAR_IZQ  TK_PAR_DER;
 
 bin_op : TK_MAS
     | TK_MENOS
@@ -233,6 +235,7 @@ RETURN:'return';
 TK_FUNC_TYPE: '->';
 PRINT: 'print';
 LEN:'len';
+INPUT:'input';
 // some lexer rules
 ID:         [a-zA-Z][a-zA-Z0-9_]* ;
 IDSTRING:   '"'[a-zA-Z][a-zA-Z0-9_]*'"' ;

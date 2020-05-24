@@ -13,6 +13,14 @@ public class ExpresionsVisitor extends chocogrammarBaseVisitor<String> {
             return arguments;
         }
     }
+    public String getTargets(chocogrammarParser.Asig_stmtContext ctx) {
+        StringBuilder builder = new StringBuilder();
+        for (chocogrammarParser.TargetContext target : ctx.target()) {
+            builder.append(visitTarget(target)).append(" = ");
+        }
+        String arguments = builder.toString();
+        return arguments;
+    }
     @Override
     public String visitExpr(chocogrammarParser.ExprContext ctx) {
         StringBuilder builder= new StringBuilder();
@@ -88,6 +96,10 @@ public class ExpresionsVisitor extends chocogrammarBaseVisitor<String> {
             return visitPrint(ctx.print());
             //semantic error i think
         }
+        if(ctx.input()!=null)
+        {
+            return visitInput(ctx.input());
+        }
         if(ctx.ID()!=null && ctx.TK_PAR_IZQ()!=null)
         {
             //ID TK_PAR_IZQ (expr (TK_COMMA expr)*)? TK_PAR_DER
@@ -156,14 +168,15 @@ public class ExpresionsVisitor extends chocogrammarBaseVisitor<String> {
         //semantic error, i think
         return "";
     }
-    public String getTargets(chocogrammarParser.Asig_stmtContext ctx) {
-        StringBuilder builder = new StringBuilder();
-        for (chocogrammarParser.TargetContext target : ctx.target()) {
-            builder.append(visitTarget(target)).append(" = ");
-        }
-        String arguments = builder.toString();
-        return arguments;
+
+    @Override
+    public String visitInput(chocogrammarParser.InputContext ctx) {
+    //INPUT TK_PAR_IZQ  TK_PAR_DER ----> readlineSync.question('May I have your name? ');
+        StringBuilder builder  = new StringBuilder();
+        return builder.append("readlineSync.question()").toString();
     }
+
+
 
     @Override
     public String visitTarget(chocogrammarParser.TargetContext ctx) {
