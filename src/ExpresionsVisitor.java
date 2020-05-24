@@ -91,6 +91,12 @@ public class ExpresionsVisitor extends chocogrammarBaseVisitor<String> {
         if(ctx.bin_op()!=null)
         {
             //cexpr bin_op cexpr
+            if(ctx.bin_op().getText().equals("is"))
+            {
+                return builder.append("typeof(").append(visitCexpr(ctx.cexpr(0))).append(") ").
+                        append("== ").append("typeof(").append(visitCexpr(ctx.cexpr(1))).
+                        append(") ").toString();
+            }
             return builder.append(visitCexpr(ctx.cexpr(0))).append(" ").
                     append(ctx.bin_op().getText()).append(" ").append(visitCexpr(ctx.cexpr(1))).toString();
         }
@@ -138,5 +144,41 @@ public class ExpresionsVisitor extends chocogrammarBaseVisitor<String> {
     public String visitPrint(chocogrammarParser.PrintContext ctx) {
         //semantic error, i think
         return "";
+    }
+    public String getTargets(chocogrammarParser.Asig_stmtContext ctx) {
+        StringBuilder builder = new StringBuilder();
+        for (chocogrammarParser.TargetContext target : ctx.target()) {
+            builder.append(visitTarget(target)).append(" = ");
+        }
+        String arguments = builder.toString();
+        return arguments;
+    }
+
+    @Override
+    public String visitTarget(chocogrammarParser.TargetContext ctx) {
+
+        StringBuilder builder = new StringBuilder();
+        if(ctx.cexpr()==null)
+        {
+            //ID
+            return ctx.ID().getText();
+        }
+        if(ctx.TK_PUNTO()!=null)
+        {
+            //cexpr TK_PUNTO ID
+            return builder.append(visitCexpr(ctx.cexpr())).append(".").append(ctx.ID().getText()).toString();
+        }
+        if(ctx.TK_COR_IZQ()!=null)
+        {
+            //cexpr TK_COR_IZQ expr TK_COR_DER
+            return builder.append(visitCexpr(ctx.cexpr())).append("[").append(visitExpr(ctx.expr())).append("]").toString();
+        }
+        return "";
+    }
+
+    @Override
+    public String visitAsig_stmt(chocogrammarParser.Asig_stmtContext ctx) {
+        StringBuilder builder = new StringBuilder();
+        return builder.append(getTargets(ctx)).append(visitExpr(ctx.expr())).toString();
     }
 }

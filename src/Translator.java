@@ -7,6 +7,17 @@ import java.util.ArrayList;
 public class Translator extends chocogrammarBaseListener{
 
     private ExpresionsVisitor visitor= new ExpresionsVisitor();
+
+    @Override
+    public void enterGlobal_decl(chocogrammarParser.Global_declContext ctx) {
+        System.out.println("global."+ctx.ID());
+    }
+
+    @Override
+    public void enterNonlocal_decl(chocogrammarParser.Nonlocal_declContext ctx) {
+        System.out.println("var "+ctx.ID());
+    }
+
     @Override
     public void enterVar_def(chocogrammarParser.Var_defContext ctx) {
         System.out.print("var "+ctx.typed_var().ID().getText()+" = "+translateLiteral(ctx.literal().getText()));
@@ -104,12 +115,12 @@ public class Translator extends chocogrammarBaseListener{
     @Override
     public void enterAsig_stmt(chocogrammarParser.Asig_stmtContext ctx) {
         System.out.println();
-        System.out.println(ctx.getText());
+        System.out.println(visitor.visitAsig_stmt(ctx));
 
     }
     @Override
     public void enterFor_expr(chocogrammarParser.For_exprContext ctx){
-        System.out.println("for ( "+ctx.ID()+" on "+visitor.visitExpr(ctx.expr())+" ){");// if it doesnt, put it
+        System.out.println("for ( "+ctx.ID()+" of "+visitor.visitExpr(ctx.expr())+" ){");// if it doesnt, put it
 
     }
     @Override
