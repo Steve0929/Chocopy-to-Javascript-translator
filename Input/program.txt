@@ -60,5 +60,6 @@ if(True and False):
     list = [True, False, None] #for this to work needs target implementation in translate
 state = "nice" if is_nice else "not nice"
 myStr = input()
+myStr2 = input()
 
 
