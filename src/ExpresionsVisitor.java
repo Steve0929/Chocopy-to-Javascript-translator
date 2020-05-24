@@ -31,6 +31,12 @@ public class ExpresionsVisitor extends chocogrammarBaseVisitor<String> {
         {
             builder.append(visitExpr(ctx.expr(0))).append(" || ").append(visitExpr(ctx.expr(1)));
         }
+        else if(ctx.IF()!=null)
+        {
+            //expr IF expr ELSE expr ----> condición ? expr1 : expr2
+            builder.append(visitExpr(ctx.expr(0))).append(" ? ").append(visitExpr(ctx.expr(1))).
+                    append(" : ").append(visitExpr(ctx.expr(2)));
+        }
         return builder.toString();
     }
 
@@ -96,6 +102,11 @@ public class ExpresionsVisitor extends chocogrammarBaseVisitor<String> {
                 return builder.append("typeof(").append(visitCexpr(ctx.cexpr(0))).append(") ").
                         append("== ").append("typeof(").append(visitCexpr(ctx.cexpr(1))).
                         append(") ").toString();
+            }
+            if(ctx.bin_op().getText().equals("//"))
+            {
+                return builder.append(visitCexpr(ctx.cexpr(0))).append(" ").
+                        append("/").append(" ").append(visitCexpr(ctx.cexpr(1))).toString();
             }
             return builder.append(visitCexpr(ctx.cexpr(0))).append(" ").
                     append(ctx.bin_op().getText()).append(" ").append(visitCexpr(ctx.cexpr(1))).toString();
