@@ -51,7 +51,7 @@ public class ExpresionsVisitor extends chocogrammarBaseVisitor<String> {
     @Override
     public String visitCexpr(chocogrammarParser.CexprContext ctx) {
         StringBuilder builder = new StringBuilder();
-        if(ctx.ID()!=null && ctx.TK_PAR_IZQ()==null)
+        if(ctx.ID()!=null && ctx.TK_PAR_IZQ()==null && ctx.TK_PUNTO()==null)
         {
             return ctx.ID().getText();
         }
@@ -59,7 +59,7 @@ public class ExpresionsVisitor extends chocogrammarBaseVisitor<String> {
         {
             return visitLiteral(ctx.literal());
         }
-        if(ctx.TK_COR_IZQ()!=null)
+        if(ctx.TK_COR_IZQ()!=null && ctx.cexpr(0)==null)
         {
             //TK_COR_IZQ (expr (TK_COMMA expr)*)? TK_COR_DER
             return builder.append("[").append(getListElements(ctx)).append("]").toString();
@@ -69,18 +69,18 @@ public class ExpresionsVisitor extends chocogrammarBaseVisitor<String> {
             //TK_PAR_IZQ expr TK_PAR_DER
             return builder.append("(").append(visitExpr(ctx.expr(0))).append(")").toString();
         }
-        if(ctx.cexpr()!=null && ctx.TK_PUNTO()!=null && ctx.TK_PAR_IZQ()==null)
+        if(ctx.cexpr(0)!=null && ctx.TK_PUNTO()!=null && ctx.TK_PAR_IZQ()==null)
         {
             //cexpr TK_PUNTO ID
             return builder.append(visitCexpr(ctx.cexpr(0))).append(".").append(ctx.ID().getText()).toString();
         }
-        if(ctx.cexpr()!=null && ctx.TK_COR_IZQ()!=null)
+        if(ctx.cexpr(0)!=null && ctx.TK_COR_IZQ()!=null)
         {
             //cexpr TK_COR_IZQ expr TK_COR_DER
             return builder.append(visitCexpr(ctx.cexpr(0))).append("[").
-                    append(visitCexpr(ctx.cexpr(1))).append("]").toString();
+                    append(visitExpr(ctx.expr(0))).append("]").toString();
         }
-        if(ctx.cexpr()!=null && ctx.TK_PUNTO()!=null && ctx.TK_PAR_IZQ()!=null)
+        if(ctx.cexpr(0)!=null && ctx.TK_PUNTO()!=null && ctx.TK_PAR_IZQ()!=null)
         {
             //cexpr TK_PUNTO ID TK_PAR_IZQ (expr (TK_COMMA expr)*)? TK_PAR_DER
             return builder.append(visitCexpr(ctx.cexpr(0))).append(".").
@@ -100,7 +100,7 @@ public class ExpresionsVisitor extends chocogrammarBaseVisitor<String> {
         {
             return visitInput(ctx.input());
         }
-        if(ctx.ID()!=null && ctx.TK_PAR_IZQ()!=null)
+        if(ctx.ID()!=null && ctx.TK_PAR_IZQ()!=null && ctx.TK_PUNTO()==null)
         {
             //ID TK_PAR_IZQ (expr (TK_COMMA expr)*)? TK_PAR_DER
             return builder.append(ctx.ID().getText()).append("(").append(getListElements(ctx))
@@ -143,13 +143,13 @@ public class ExpresionsVisitor extends chocogrammarBaseVisitor<String> {
         String literal = ctx.getText();
         switch(literal) {
             case "True":
-                literal = "true";
+                literal = " true ";
                 break;
             case "False":
-                literal = "false";
+                literal = " false ";
                 break;
             case "None":
-                literal = "null";
+                literal = " null ";
                 break;
 
             default:
@@ -160,7 +160,7 @@ public class ExpresionsVisitor extends chocogrammarBaseVisitor<String> {
     }
     @Override
     public String visitArray_lenght(chocogrammarParser.Array_lenghtContext ctx) {
-        return(ctx.expr().getText()+".length");
+        return(ctx.expr().getText()+".length ");
     }
 
     @Override
@@ -205,4 +205,6 @@ public class ExpresionsVisitor extends chocogrammarBaseVisitor<String> {
         StringBuilder builder = new StringBuilder();
         return builder.append(getTargets(ctx)).append(visitExpr(ctx.expr())).toString();
     }
+
+
 }

@@ -1,4 +1,4 @@
-// Generated from C:/Users/Mike/IdeaProjects/Chocopy-to-Javascript-translator/Grammar\chocogrammar.g4 by ANTLR 4.8
+// Generated from C:/Users/chimi/IdeaProjects/Translate/Grammar\chocogrammar.g4 by ANTLR 4.8
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -358,6 +358,30 @@ public class chocogrammarBaseListener implements chocogrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTarget(chocogrammarParser.TargetContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPosible_comment(chocogrammarParser.Posible_commentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPosible_comment(chocogrammarParser.Posible_commentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPosible_line_comment(chocogrammarParser.Posible_line_commentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPosible_line_comment(chocogrammarParser.Posible_line_commentContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
