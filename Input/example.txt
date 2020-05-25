@@ -1,3 +1,4 @@
+#search in list
 def contains(items:[int], x:int) -> bool:
     i:int = 0
     while i < len(items):

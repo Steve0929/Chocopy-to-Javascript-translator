@@ -12,7 +12,7 @@ def exp(x: int, y: int) -> int: #pos function declaration comment
     #idented comment
 	a: int = 0
 	def f(i: int) -> int:
-		nonlocal a
+		#nonlocal a
 		def geta() -> int:
 			return a*2
 		if i <= 0: #if comment
