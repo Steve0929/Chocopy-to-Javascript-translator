@@ -218,7 +218,8 @@ public class Translator extends chocogrammarBaseListener{
 
     @Override
     public void enterClass_def(chocogrammarParser.Class_defContext ctx){
-        if(ctx.ID(1).toString() != "object"){
+
+        if(!ctx.ID(1).toString().equals("object")){
         System.out.println("class "+ctx.ID(0)+" extends "+ctx.ID(1)+" {");}
         else{
             System.out.println("class "+ctx.ID(0)+" {");
@@ -251,15 +252,15 @@ public class Translator extends chocogrammarBaseListener{
             System.out.println(") {");
             i = 0;
             while (i <= ctx.var_def().size() - 1) {
-                System.out.println("this." + ctx.var_def(i).typed_var().ID().getText() + " = " + ctx.var_def(i).typed_var().ID().getText() + ";");
+                System.out.println("this." + ctx.var_def(i).typed_var().ID().getText() + " = " + ctx.var_def(i).literal().getText() + ";");
 
                 i++;
             }
             System.out.println("}");
         }
         if(ctx.func_def() != null){
-            System.out.println("Funciones");
-            System.out.println(ctx.func_def());
+           /* System.out.println("Funciones");
+            System.out.println(ctx.func_def());*/
         }
     }
 
