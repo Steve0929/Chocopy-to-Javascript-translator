@@ -100,7 +100,7 @@ class_def : CLASS ID TK_PAR_IZQ ID TK_PAR_DER TK_DOS_PUNTOS NEWLINE INDENT class
 class_body : PASS posible_line_comment? NEWLINE
              | (var_def | func_def)+ posible_line_comment?
              ;
-func_def : DEF ID TK_PAR_IZQ (typed_var (TK_COMMA typed_var)*)? TK_PAR_DER (TK_FUNC_TYPE type)? ':' posible_line_comment? NEWLINE INDENT func_body DEDENT;
+func_def : DEF ID TK_PAR_IZQ (typed_var (TK_COMMA typed_var)*)? TK_PAR_DER (TK_FUNC_TYPE type)? ':' posible_line_comment* NEWLINE INDENT func_body DEDENT;
 
 func_body : (global_decl | nonlocal_decl | var_def | func_def )* stmt+ posible_line_comment? | posible_line_comment?;
 

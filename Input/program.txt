@@ -9,6 +9,7 @@ def foo(s: str) -> int:
    return True
 # x**y
 def exp(x: int, y: int) -> int: #pos function declaration comment
+    #idented comment
 	a: int = 0
 	def f(i: int) -> int:
 		nonlocal a
