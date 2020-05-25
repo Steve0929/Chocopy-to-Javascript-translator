@@ -1,7 +1,7 @@
 grammar chocogrammar;
 
 
-//Python official grammar
+//Python official grammar indents handler
 tokens { INDENT, DEDENT }
 
 @lexer::members {
@@ -93,47 +93,47 @@ tokens { INDENT, DEDENT }
   }
 }
 
-program : (var_def | func_def | class_def )* stmt*;
+program :  (var_def | func_def | class_def )* stmt* | posible_line_comment* NEWLINE (var_def | func_def | class_def )+ stmt+ ;
 
-class_def : CLASS ID TK_PAR_IZQ ID TK_PAR_DER TK_DOS_PUNTOS NEWLINE INDENT class_body DEDENT;
+class_def : CLASS ID TK_PAR_IZQ ID TK_PAR_DER TK_DOS_PUNTOS NEWLINE INDENT class_body DEDENT ;
 
-class_body : PASS NEWLINE
-             | (var_def | func_def)+
+class_body : PASS posible_line_comment? NEWLINE
+             | (var_def | func_def)+ posible_line_comment?
              ;
-func_def : DEF ID TK_PAR_IZQ (typed_var (TK_COMMA typed_var)*)? TK_PAR_DER (TK_FUNC_TYPE type)? ':' NEWLINE INDENT func_body DEDENT;
+func_def : DEF ID TK_PAR_IZQ (typed_var (TK_COMMA typed_var)*)? TK_PAR_DER (TK_FUNC_TYPE type)? ':' posible_line_comment* NEWLINE INDENT func_body DEDENT;
 
-func_body : (global_decl | nonlocal_decl | var_def | func_def )* stmt+;
+func_body : (global_decl | nonlocal_decl | var_def | func_def )* stmt+ posible_line_comment? | posible_line_comment?;
 
 typed_var : ID TK_DOS_PUNTOS type;
 
-type : ID
-    | IDSTRING
-    | TK_COR_IZQ type TK_COR_DER;
+type : ID posible_line_comment?
+    | IDSTRING posible_line_comment?
+    | TK_COR_IZQ type TK_COR_DER posible_line_comment?;
 
-global_decl : GLOBAL ID NEWLINE;
+global_decl : GLOBAL ID posible_line_comment* NEWLINE;
 
-nonlocal_decl : NONLOCAL ID NEWLINE;
+nonlocal_decl : NONLOCAL ID posible_line_comment* NEWLINE;
 
-var_def : typed_var TK_ASIG literal NEWLINE;
+var_def : typed_var TK_ASIG literal posible_line_comment? NEWLINE;
 
-stmt : simple_stmt NEWLINE
+stmt : simple_stmt posible_line_comment? NEWLINE
     | if_expr
     | while_expr
     | for_expr
     ;
 
-if_expr: IF expr TK_DOS_PUNTOS block elif_expr* else_expr?  ;
-else_expr:ELSE TK_DOS_PUNTOS block;
-elif_expr: ELIF expr TK_DOS_PUNTOS block;
-while_expr: WHILE expr TK_DOS_PUNTOS block ;
-for_expr: FOR ID IN expr TK_DOS_PUNTOS block ;
+if_expr: IF expr TK_DOS_PUNTOS posible_line_comment? block elif_expr* else_expr?  ;
+else_expr:ELSE TK_DOS_PUNTOS posible_line_comment? block;
+elif_expr: ELIF expr TK_DOS_PUNTOS posible_line_comment? block;
+while_expr: WHILE expr TK_DOS_PUNTOS posible_line_comment? block ;
+for_expr: FOR ID IN expr TK_DOS_PUNTOS posible_line_comment? block ;
 
-simple_stmt : PASS
-    | expr
-    | return_st
-    | asig_stmt
+simple_stmt : PASS posible_line_comment?
+    | expr posible_line_comment?
+    | return_st posible_line_comment?
+    | asig_stmt posible_line_comment?
     ;
-asig_stmt: (target TK_ASIG)+ expr;
+asig_stmt: (target TK_ASIG)+ expr ;
 
 return_st: RETURN expr? ;
 
@@ -146,17 +146,17 @@ literal : NONE
     | IDSTRING
     | STRING;
 ///
-expr : cexpr
-    | not_expr
-    | expr (AND | OR) expr
-    | expr IF expr ELSE expr
+expr : cexpr posible_line_comment?
+    | not_expr posible_line_comment?
+    | expr (AND | OR) expr posible_line_comment?
+    | expr IF expr ELSE expr posible_line_comment?
     ;
 
 not_expr: NOT expr;
 
 
 ///
-cexpr : ID
+cexpr : ID posible_line_comment?
     | literal
     | TK_COR_IZQ (expr (TK_COMMA expr)*)? TK_COR_DER
     | TK_PAR_IZQ expr TK_PAR_DER
@@ -170,9 +170,9 @@ cexpr : ID
     | cexpr bin_op cexpr
     | TK_MENOS cexpr
     ;
-array_lenght: LEN TK_PAR_IZQ expr TK_PAR_DER;
-print : PRINT TK_PAR_IZQ expr TK_PAR_DER;
-input: INPUT TK_PAR_IZQ  TK_PAR_DER;
+array_lenght: LEN TK_PAR_IZQ expr TK_PAR_DER posible_line_comment?;
+print : PRINT TK_PAR_IZQ expr TK_PAR_DER posible_line_comment?;
+input: INPUT TK_PAR_IZQ  TK_PAR_DER posible_line_comment?;
 
 bin_op : TK_MAS
     | TK_MENOS
@@ -193,6 +193,8 @@ target : ID
     | cexpr TK_COR_IZQ expr TK_COR_DER
     ;
 
+posible_comment: COMMENT;
+posible_line_comment: LINE_COMMENT;
 
 NOT : 'not';
 AND : 'and';
@@ -245,17 +247,18 @@ INTEGER:    [0-9]+ ; // match integers
 
 
 //Python official grammar
-LINE_COMMENT 	: '#' ~[\r\n\f]* -> channel(2) ;
+//LINE_COMMENT 	: '#' ~[\r\n\f]* -> channel(2) ;
+LINE_COMMENT 	: '#' ~[\r\n\f]*  ;
 fragment SPACES
  : [ \t]+
  ;
 
-fragment COMMENT
+COMMENT
  : '#' ~[\r\n\f]*
  ;
 
 SKIP_
- : ( SPACES|COMMENT ) -> skip
+ : ( SPACES ) -> skip
  ;
 
 NEWLINE

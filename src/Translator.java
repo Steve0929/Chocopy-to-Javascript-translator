@@ -21,7 +21,7 @@ public class Translator extends chocogrammarBaseListener{
 
     @Override
     public void enterVar_def(chocogrammarParser.Var_defContext ctx) {
-        System.out.print("var "+ctx.typed_var().ID().getText()+" = "+translateLiteral(ctx.literal().getText()));
+        System.out.print("var "+ctx.typed_var().ID().getText()+" = "+translateLiteral(ctx.literal().getText())+" ");
 
     }
 
@@ -194,6 +194,20 @@ public class Translator extends chocogrammarBaseListener{
             //maybe if print is found there is a semantic error
 
     }
+
+    @Override
+    public void enterPosible_line_comment(chocogrammarParser.Posible_line_commentContext ctx){
+        System.out.print("//"+ctx.getText().substring(1)); //Remove # character
+        System.out.println();
+    };
+
+    @Override
+    public void enterPosible_comment(chocogrammarParser.Posible_commentContext ctx){
+        System.out.print(" //"+ctx.getText().substring(1)); //Remove # character
+    };
+
+
+
 
    /*@Override
     public void enterArray_lenght(chocogrammarParser.Array_lenghtContext ctx) {

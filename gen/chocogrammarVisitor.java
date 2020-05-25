@@ -1,4 +1,4 @@
-// Generated from C:/Users/Mike/IdeaProjects/Chocopy-to-Javascript-translator/Grammar\chocogrammar.g4 by ANTLR 4.8
+// Generated from C:/Users/chimi/IdeaProjects/Translate/Grammar\chocogrammar.g4 by ANTLR 4.8
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -183,4 +183,16 @@ public interface chocogrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitTarget(chocogrammarParser.TargetContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link chocogrammarParser#posible_comment}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPosible_comment(chocogrammarParser.Posible_commentContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link chocogrammarParser#posible_line_comment}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPosible_line_comment(chocogrammarParser.Posible_line_commentContext ctx);
 }
