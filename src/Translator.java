@@ -186,10 +186,10 @@ public class Translator extends chocogrammarBaseListener{
             if(ctx.expr()!=null)
             {
 
-                System.out.print("return "+visitor.visitExpr(ctx.expr()));
+                System.out.println("return "+visitor.visitExpr(ctx.expr()));
             }
             else
-                System.out.print("return ");
+                System.out.println("return ");
 
             //maybe if print is found there is a semantic error
 
