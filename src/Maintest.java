@@ -108,7 +108,7 @@ public class Maintest {
             System.out.println();//print ln after translation
         }
        catch(Exception e){
-           System.err.println("Error: "+e);
+           System.err.println("Error: "+e.getStackTrace()[0].getLineNumber());
        }
 
     }
