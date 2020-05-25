@@ -46,8 +46,14 @@ public class Maintest {
                             System.out.println("Example: program.txt");
                             option = reader.readLine();
                             System.out.println("-----------------------------------------------");
-                            lexer = new chocogrammarLexer(CharStreams.fromFileName("Input/"+option));
-                            validOption = true;
+                            try{
+                                lexer = new chocogrammarLexer(CharStreams.fromFileName("Input/"+option));
+                                validOption = true;
+                            }catch (Exception e){
+                                System.out.println("Enter valid file name");
+                                validOption = false;
+                            }
+
                             break;
                         default:
                             System.out.println("Enter valid option");
