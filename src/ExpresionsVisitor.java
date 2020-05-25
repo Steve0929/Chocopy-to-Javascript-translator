@@ -143,13 +143,13 @@ public class ExpresionsVisitor extends chocogrammarBaseVisitor<String> {
         String literal = ctx.getText();
         switch(literal) {
             case "True":
-                literal = "true";
+                literal = " true ";
                 break;
             case "False":
-                literal = "false";
+                literal = " false ";
                 break;
             case "None":
-                literal = "null";
+                literal = " null ";
                 break;
 
             default:
@@ -160,7 +160,7 @@ public class ExpresionsVisitor extends chocogrammarBaseVisitor<String> {
     }
     @Override
     public String visitArray_lenght(chocogrammarParser.Array_lenghtContext ctx) {
-        return(ctx.expr().getText()+".length");
+        return(ctx.expr().getText()+".length ");
     }
 
     @Override
@@ -205,4 +205,6 @@ public class ExpresionsVisitor extends chocogrammarBaseVisitor<String> {
         StringBuilder builder = new StringBuilder();
         return builder.append(getTargets(ctx)).append(visitExpr(ctx.expr())).toString();
     }
+
+
 }

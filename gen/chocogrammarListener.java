@@ -1,4 +1,4 @@
-// Generated from C:/Users/Mike/IdeaProjects/Chocopy-to-Javascript-translator/Grammar\chocogrammar.g4 by ANTLR 4.8
+// Generated from C:/Users/chimi/IdeaProjects/Translate/Grammar\chocogrammar.g4 by ANTLR 4.8
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -296,4 +296,24 @@ public interface chocogrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTarget(chocogrammarParser.TargetContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link chocogrammarParser#posible_comment}.
+	 * @param ctx the parse tree
+	 */
+	void enterPosible_comment(chocogrammarParser.Posible_commentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link chocogrammarParser#posible_comment}.
+	 * @param ctx the parse tree
+	 */
+	void exitPosible_comment(chocogrammarParser.Posible_commentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link chocogrammarParser#posible_line_comment}.
+	 * @param ctx the parse tree
+	 */
+	void enterPosible_line_comment(chocogrammarParser.Posible_line_commentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link chocogrammarParser#posible_line_comment}.
+	 * @param ctx the parse tree
+	 */
+	void exitPosible_line_comment(chocogrammarParser.Posible_line_commentContext ctx);
 }
