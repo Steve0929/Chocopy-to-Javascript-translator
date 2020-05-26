@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Translator extends chocogrammarBaseListener{
 
@@ -13,6 +15,7 @@ public class Translator extends chocogrammarBaseListener{
     private Boolean inside_class = false;
     private Boolean is_child_class = false;
     private StringBuilder toFile = new StringBuilder();
+    private List<String> classes = new ArrayList<>();
 
     private static void write(String data) {
         try {
@@ -76,6 +79,7 @@ public class Translator extends chocogrammarBaseListener{
                 //
                 // code block
         }
+
         return literal;
     }
 
@@ -159,8 +163,20 @@ public class Translator extends chocogrammarBaseListener{
     @Override
     public void enterAsig_stmt(chocogrammarParser.Asig_stmtContext ctx) {
         System.out.println();
-        System.out.println(visitor.visitAsig_stmt(ctx));
-        toFile.append("\n"+visitor.visitAsig_stmt(ctx)+"\n");
+        Boolean flag = false;
+        for (String defined_class : classes) { //check if needs to be new ctx.expr()
+            if(ctx.expr().getText().equals(defined_class)){
+                flag = true;
+            }
+        }
+        if(flag == true){
+            System.out.println(ctx.target(0).getText()+" = new "+ctx.expr().getText());
+            toFile.append("\n"+ctx.target(0).getText()+" = new "+ctx.expr().getText()+"\n");
+        }
+        else{
+            System.out.println(visitor.visitAsig_stmt(ctx));
+            toFile.append("\n"+visitor.visitAsig_stmt(ctx)+"\n");
+        }
 
     }
     @Override
@@ -308,6 +324,7 @@ public class Translator extends chocogrammarBaseListener{
             System.out.println("class "+ctx.ID(0)+" {");
             toFile.append("class "+ctx.ID(0)+" {\n");
         }
+        classes.add(ctx.ID(0).toString()+"()"); //add to the list an instance of class ex: cow()
     }
 
     @Override
