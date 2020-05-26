@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Translator extends chocogrammarBaseListener{
 
@@ -13,6 +15,7 @@ public class Translator extends chocogrammarBaseListener{
     private Boolean inside_class = false;
     private Boolean is_child_class = false;
     private StringBuilder toFile = new StringBuilder();
+    private List<String> classes = new ArrayList<>();
 
     private static void write(String data) {
         try {
@@ -51,9 +54,6 @@ public class Translator extends chocogrammarBaseListener{
         }
 
 
-
-
-
     }
 
     @Override
@@ -61,13 +61,6 @@ public class Translator extends chocogrammarBaseListener{
 
         //System.out.println(ctx.parent.getText());
         //System.out.println(ctx.ID().getText());
-        //if(inside_class == true){
-        //}
-        if(inside_class){
-        /*System.out.println("\nPartes del vartyped------");
-        //System.out.println(ctx.ID().getText());
-        System.out.print(visitor.visitTyped_var(ctx));
-        System.out.println("------");*/}
     }
 
     public String translateLiteral(String literal) {
@@ -86,6 +79,7 @@ public class Translator extends chocogrammarBaseListener{
                 //
                 // code block
         }
+
         return literal;
     }
 
@@ -136,9 +130,6 @@ public class Translator extends chocogrammarBaseListener{
     @Override
     public void enterFunc_body(chocogrammarParser.Func_bodyContext ctx) {
         System.out.print("{");
-       /* if(inside_class == true){
-            System.out.println(ctx.func_def(0).func_body().getText().replaceAll("self","this"));
-        }*/
         System.out.println();
         toFile.append("{\n");
     }
@@ -172,8 +163,20 @@ public class Translator extends chocogrammarBaseListener{
     @Override
     public void enterAsig_stmt(chocogrammarParser.Asig_stmtContext ctx) {
         System.out.println();
-        System.out.println(visitor.visitAsig_stmt(ctx).replaceAll("self","this"));
-        toFile.append("\n"+visitor.visitAsig_stmt(ctx).replaceAll("self","this")+"\n");
+        Boolean flag = false;
+        for (String defined_class : classes) { //check if needs to be new ctx.expr()
+            if(ctx.expr().getText().equals(defined_class)){
+                flag = true;
+            }
+        }
+        if(flag == true){
+            System.out.println(ctx.target(0).getText()+" = new "+ctx.expr().getText());
+            toFile.append("\n"+ctx.target(0).getText()+" = new "+ctx.expr().getText()+"\n");
+        }
+        else{
+            System.out.println(visitor.visitAsig_stmt(ctx));
+            toFile.append("\n"+visitor.visitAsig_stmt(ctx)+"\n");
+        }
 
     }
     @Override
@@ -321,6 +324,7 @@ public class Translator extends chocogrammarBaseListener{
             System.out.println("class "+ctx.ID(0)+" {");
             toFile.append("class "+ctx.ID(0)+" {\n");
         }
+        classes.add(ctx.ID(0).toString()+"()"); //add to the list an instance of class ex: cow()
     }
 
     @Override
@@ -333,7 +337,6 @@ public class Translator extends chocogrammarBaseListener{
 
     @Override
     public void enterClass_body(chocogrammarParser.Class_bodyContext ctx){
-        StringBuilder builder = new StringBuilder();
 
         if(ctx.var_def() != null) {
             int i = 0;
@@ -374,11 +377,7 @@ public class Translator extends chocogrammarBaseListener{
                     System.out.println("init__(this)");
                     toFile.append("this.init__(this)\n");
                 }
-               /* System.out.println("flag");
-                System.out.println(ctx.func_def(j).func_body().getText());*/
-
             }
-
             System.out.println("}");
             toFile.append("}\n");
 
