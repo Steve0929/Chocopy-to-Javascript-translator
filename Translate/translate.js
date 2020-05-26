@@ -43,5 +43,5 @@ class cow extends animal {
 
 var c = null
 
-c = cow()
+c = new cow()
 //Prints "moo"
