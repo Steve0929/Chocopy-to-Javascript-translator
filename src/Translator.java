@@ -1,12 +1,20 @@
-import org.antlr.v4.runtime.ParserRuleContext;
-import org.antlr.v4.runtime.tree.ErrorNode;
-import org.antlr.v4.runtime.tree.TerminalNode;
-
-import java.util.ArrayList;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Translator extends chocogrammarBaseListener{
 
     private ExpresionsVisitor visitor= new ExpresionsVisitor();
+    private StringBuilder toFile = new StringBuilder();
+    private static void write(String data) {
+        try {
+            Files.write(Paths.get("Translate/translate.js"), data.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 
     @Override
@@ -22,6 +30,7 @@ public class Translator extends chocogrammarBaseListener{
     @Override
     public void enterVar_def(chocogrammarParser.Var_defContext ctx) {
         System.out.print("var "+ctx.typed_var().ID().getText()+" = "+translateLiteral(ctx.literal().getText())+" ");
+        toFile.append("var "+ctx.typed_var().ID().getText()+" = "+translateLiteral(ctx.literal().getText())+" ");
 
     }
 
@@ -54,6 +63,7 @@ public class Translator extends chocogrammarBaseListener{
     @Override
     public void exitVar_def(chocogrammarParser.Var_defContext ctx) {
         System.out.println();
+        toFile.append("\n");
     }
 
     //gets arguments of a function
@@ -77,22 +87,26 @@ public class Translator extends chocogrammarBaseListener{
     @Override
     public void enterFunc_def(chocogrammarParser.Func_defContext ctx) {
         System.out.print( "function "+ctx.ID().getText()+"("+ getFunctionArgs(ctx) +")");
+        toFile.append( "function "+ctx.ID().getText()+"("+ getFunctionArgs(ctx) +")");
     }
     @Override
     public void exitFunc_def(chocogrammarParser.Func_defContext ctx) {
         System.out.print("}");
         System.out.println();
+        toFile.append("}\n");
     }
 
     @Override
     public void enterFunc_body(chocogrammarParser.Func_bodyContext ctx) {
         System.out.print("{");
         System.out.println();
+        toFile.append("{\n");
     }
 
     @Override
     public void exitFunc_body(chocogrammarParser.Func_bodyContext ctx) {
         System.out.println();
+        toFile.append("\n");
     }
 
 
@@ -100,6 +114,7 @@ public class Translator extends chocogrammarBaseListener{
     public void enterPrint(chocogrammarParser.PrintContext ctx) {
         try {
             System.out.print("console.log("+translateLiteral(visitor.visitExpr(ctx.expr())));
+            toFile.append("console.log("+translateLiteral(visitor.visitExpr(ctx.expr())));
 
         }catch (Exception e)
         {
@@ -110,6 +125,7 @@ public class Translator extends chocogrammarBaseListener{
     @Override
     public void exitPrint(chocogrammarParser.PrintContext ctx) {
         System.out.println(");");
+        toFile.append(");");
     }
 
 
@@ -117,39 +133,58 @@ public class Translator extends chocogrammarBaseListener{
     public void enterAsig_stmt(chocogrammarParser.Asig_stmtContext ctx) {
         System.out.println();
         System.out.println(visitor.visitAsig_stmt(ctx));
+        toFile.append("\n"+visitor.visitAsig_stmt(ctx));
 
     }
     @Override
     public void enterFor_expr(chocogrammarParser.For_exprContext ctx){
         System.out.println("for ( "+ctx.ID()+" of "+visitor.visitExpr(ctx.expr())+" ){");// if it doesnt, put it
+        toFile.append("for ( "+ctx.ID()+" of "+visitor.visitExpr(ctx.expr())+" ){");
 
     }
     @Override
     public void exitFor_expr(chocogrammarParser.For_exprContext ctx){
         System.out.println("}");
+        toFile.append("}");
     }
     @Override
     public void enterIf_expr(chocogrammarParser.If_exprContext ctx) {
         if(ctx.getChild(1).getText().charAt(0)=='(') //if it has ( dont put another one
+        {
             System.out.print( "if"+ visitor.visitExpr(ctx.expr()) + "{" );
-        else
+            toFile.append( "if"+ visitor.visitExpr(ctx.expr()) + "{" );
+        }
+        else{
             System.out.print( "if("+ visitor.visitExpr(ctx.expr())+") {" );// if it doesnt, put it
+            toFile.append( "if("+ visitor.visitExpr(ctx.expr())+") {" );
+        }
+
         System.out.println(); //empty line
+        toFile.append("\n");
 
     }
 
     @Override
     public void enterElif_expr(chocogrammarParser.Elif_exprContext ctx) {
         if(ctx.getChild(1).getText().charAt(0)=='(') //if it has ( dont put another one
+        {
             System.out.print( "}else if"+ visitor.visitExpr(ctx.expr())+"{" );
+            toFile.append( "}else if"+ visitor.visitExpr(ctx.expr())+"{" );
+        }
         else
+        {
             System.out.print( "}else if("+ visitor.visitExpr(ctx.expr())+") {" );// if it doesnt, put it
+            toFile.append( "}else if("+ visitor.visitExpr(ctx.expr())+") {" );// if it doesnt, put it
+        }
+
         System.out.println(); //empty line
+        toFile.append("\n");
     }
 
     @Override
     public void exitElif_expr(chocogrammarParser.Elif_exprContext ctx) {
         System.out.println(); //empty line
+        toFile.append("\n");
 
     }
 
@@ -157,12 +192,14 @@ public class Translator extends chocogrammarBaseListener{
     public void enterElse_expr(chocogrammarParser.Else_exprContext ctx) {
         System.out.println();
         System.out.println("}else{");
+        toFile.append("\n}else{");
 
     }
 
     @Override public void exitIf_expr(chocogrammarParser.If_exprContext ctx) {
         System.out.println(); //empty line
         System.out.println("}");
+        toFile.append("\n}");
 
 
     }
@@ -171,14 +208,22 @@ public class Translator extends chocogrammarBaseListener{
     public void enterWhile_expr(chocogrammarParser.While_exprContext ctx) {
         //super.enterWhile_expr(ctx);
         if(ctx.getChild(1).getText().charAt(0)=='(') //if it has ( dont put another one
+        {
             System.out.println("while "+visitor.visitExpr(ctx.expr())+"){");
+            toFile.append("while "+visitor.visitExpr(ctx.expr())+"){");
+        }
         else
+        {
             System.out.println("while ("+visitor.visitExpr(ctx.expr())+"){");
+            toFile.append("while ("+visitor.visitExpr(ctx.expr())+"){");
+        }
+
     }
 
     @Override
     public void exitWhile_expr(chocogrammarParser.While_exprContext ctx) {
         System.out.println("}");
+        toFile.append("}");
     }
 
     @Override
@@ -187,9 +232,14 @@ public class Translator extends chocogrammarBaseListener{
             {
 
                 System.out.println("return "+visitor.visitExpr(ctx.expr()));
+                toFile.append("return "+visitor.visitExpr(ctx.expr()));
             }
             else
+            {
                 System.out.println("return ");
+                toFile.append("return ");
+            }
+
 
             //maybe if print is found there is a semantic error
 
@@ -199,11 +249,14 @@ public class Translator extends chocogrammarBaseListener{
     public void enterPosible_line_comment(chocogrammarParser.Posible_line_commentContext ctx){
         System.out.print("//"+ctx.getText().substring(1)); //Remove # character
         System.out.println();
+        toFile.append("//"+ctx.getText().substring(1)+"\n"); //Remove # character
+
     };
 
     @Override
     public void enterPosible_comment(chocogrammarParser.Posible_commentContext ctx){
         System.out.print(" //"+ctx.getText().substring(1)); //Remove # character
+        toFile.append(" //"+ctx.getText().substring(1)); //Remove # character
     };
 
 
@@ -264,5 +317,8 @@ public class Translator extends chocogrammarBaseListener{
         }
     }
 
-
+    @Override
+    public void exitProgram(chocogrammarParser.ProgramContext ctx) {
+        write(toFile.toString());
+    }
 }
