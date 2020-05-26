@@ -9,4 +9,13 @@ class animal (object):
     def sound (self : "animal") -> str :
         return "??? "
 
+class cow(animal):
+    def init__(self: "cow"):
+        self.makes_noise = True
 
+    def sound(self: "cow") -> str:
+        return "moo"
+
+c:animal = None
+c = cow()
+c.makes_noise()     #Prints "moo"

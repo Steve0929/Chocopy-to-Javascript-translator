@@ -24,7 +24,7 @@ def exp(x: int, y: int) -> int: #pos function declaration comment
 
 class bar(pp):
     p: bool = True
-
+    q: bool = False
     def baz(self:"bar", xx: [int]) -> str:
         global count
         x:int = 0
