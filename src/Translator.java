@@ -21,11 +21,13 @@ public class Translator extends chocogrammarBaseListener{
     @Override
     public void enterGlobal_decl(chocogrammarParser.Global_declContext ctx) {
         System.out.println("global."+ctx.ID());
+        toFile.append("global."+ctx.ID()+"\n");
     }
 
     @Override
     public void enterNonlocal_decl(chocogrammarParser.Nonlocal_declContext ctx) {
         System.out.println("var "+ctx.ID());
+        toFile.append("var "+ctx.ID()+"\n");
     }
 
     @Override
@@ -148,13 +150,13 @@ public class Translator extends chocogrammarBaseListener{
     public void enterAsig_stmt(chocogrammarParser.Asig_stmtContext ctx) {
         System.out.println();
         System.out.println(visitor.visitAsig_stmt(ctx));
-        toFile.append("\n"+visitor.visitAsig_stmt(ctx));
+        toFile.append("\n"+visitor.visitAsig_stmt(ctx)+"\n");
 
     }
     @Override
     public void enterFor_expr(chocogrammarParser.For_exprContext ctx){
         System.out.println("for ( "+ctx.ID()+" of "+visitor.visitExpr(ctx.expr())+" ){");// if it doesnt, put it
-        toFile.append("for ( "+ctx.ID()+" of "+visitor.visitExpr(ctx.expr())+" ){");
+        toFile.append("for ( "+ctx.ID()+" of "+visitor.visitExpr(ctx.expr())+" ){"+"\n");
 
     }
     @Override
@@ -207,14 +209,14 @@ public class Translator extends chocogrammarBaseListener{
     public void enterElse_expr(chocogrammarParser.Else_exprContext ctx) {
         System.out.println();
         System.out.println("}else{");
-        toFile.append("\n}else{");
+        toFile.append("\n}else{"+"\n");
 
     }
 
     @Override public void exitIf_expr(chocogrammarParser.If_exprContext ctx) {
         System.out.println(); //empty line
         System.out.println("}");
-        toFile.append("\n}");
+        toFile.append("\n}\n");
 
 
     }
@@ -225,12 +227,12 @@ public class Translator extends chocogrammarBaseListener{
         if(ctx.getChild(1).getText().charAt(0)=='(') //if it has ( dont put another one
         {
             System.out.println("while "+visitor.visitExpr(ctx.expr())+"){");
-            toFile.append("while "+visitor.visitExpr(ctx.expr())+"){");
+            toFile.append("while "+visitor.visitExpr(ctx.expr())+"){\n");
         }
         else
         {
             System.out.println("while ("+visitor.visitExpr(ctx.expr())+"){");
-            toFile.append("while ("+visitor.visitExpr(ctx.expr())+"){");
+            toFile.append("while ("+visitor.visitExpr(ctx.expr())+"){\n");
         }
 
     }
@@ -238,7 +240,7 @@ public class Translator extends chocogrammarBaseListener{
     @Override
     public void exitWhile_expr(chocogrammarParser.While_exprContext ctx) {
         System.out.println("}");
-        toFile.append("}");
+        toFile.append("}\n");
     }
 
     @Override
@@ -247,12 +249,12 @@ public class Translator extends chocogrammarBaseListener{
             {
 
                 System.out.println("return "+visitor.visitExpr(ctx.expr()));
-                toFile.append("return "+visitor.visitExpr(ctx.expr()));
+                toFile.append("return "+visitor.visitExpr(ctx.expr())+"\n");
             }
             else
             {
                 System.out.println("return ");
-                toFile.append("return ");
+                toFile.append("return \n");
             }
 
 
@@ -288,9 +290,12 @@ public class Translator extends chocogrammarBaseListener{
     public void enterClass_def(chocogrammarParser.Class_defContext ctx){
         inside_class = true;
         if(!ctx.ID(1).toString().equals("object")){
-        System.out.println("class "+ctx.ID(0)+" extends "+ctx.ID(1)+" {");}
+        System.out.println("class "+ctx.ID(0)+" extends "+ctx.ID(1)+" {\n");
+        toFile.append("class "+ctx.ID(0)+" extends "+ctx.ID(1)+" {");
+        }
         else{
             System.out.println("class "+ctx.ID(0)+" {");
+            toFile.append("class "+ctx.ID(0)+" {\n");
         }
     }
 
@@ -298,6 +303,7 @@ public class Translator extends chocogrammarBaseListener{
     public void exitClass_def(chocogrammarParser.Class_defContext ctx){
         inside_class = false;
         System.out.println("}");
+        toFile.append("}\n");
     }
 
     @Override
@@ -306,6 +312,7 @@ public class Translator extends chocogrammarBaseListener{
         if(ctx.var_def() != null) {
             int i = 0;
             System.out.print("constructor(");
+            toFile.append("constructor(");
             while (i <= ctx.var_def().size() - 1) {
                 /*
                 if (i == 0) {
@@ -313,19 +320,24 @@ public class Translator extends chocogrammarBaseListener{
                 }*/
                 if (i < ctx.var_def().size() - 1) {
                     System.out.print(ctx.var_def(i).typed_var().ID().getText() + ",");
+                    toFile.append(ctx.var_def(i).typed_var().ID().getText() + ",");
                 } else {
                     System.out.print((ctx.var_def(i).typed_var().ID().getText()));
+                    toFile.append((ctx.var_def(i).typed_var().ID().getText()));
                 }
                 i++;
             }
             System.out.println(") {");
+            toFile.append(") {\n");
             i = 0;
             while (i <= ctx.var_def().size() - 1) {
                 System.out.println("this." + ctx.var_def(i).typed_var().ID().getText() + " = " + visitor.visitLiteral(ctx.var_def(i).literal())  + ";");
+                toFile.append("this." + ctx.var_def(i).typed_var().ID().getText() + " = " + visitor.visitLiteral(ctx.var_def(i).literal())  + ";\n");
 
                 i++;
             }
             System.out.println("}");
+            toFile.append("}\n");
         }
         if(ctx.func_def() != null){
            /* System.out.println("Funciones");
