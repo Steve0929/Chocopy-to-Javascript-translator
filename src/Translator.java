@@ -174,8 +174,8 @@ public class Translator extends chocogrammarBaseListener{
             toFile.append("\n"+ctx.target(0).getText()+" = new "+ctx.expr().getText()+"\n");
         }
         else{
-            System.out.println(visitor.visitAsig_stmt(ctx));
-            toFile.append("\n"+visitor.visitAsig_stmt(ctx)+"\n");
+            System.out.println(visitor.visitAsig_stmt(ctx).replaceAll("self","this"));
+            toFile.append("\n"+visitor.visitAsig_stmt(ctx).replaceAll("self","this")+"\n");
         }
 
     }
