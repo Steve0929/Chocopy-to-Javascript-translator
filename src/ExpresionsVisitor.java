@@ -45,7 +45,7 @@ public class ExpresionsVisitor extends chocogrammarBaseVisitor<String> {
             builder.append(visitExpr(ctx.expr(0))).append(" ? ").append(visitExpr(ctx.expr(1))).
                     append(" : ").append(visitExpr(ctx.expr(2)));
         }
-        return builder.toString();
+        return builder.toString().replaceAll("self","this");
     }
 
     @Override
@@ -204,6 +204,13 @@ public class ExpresionsVisitor extends chocogrammarBaseVisitor<String> {
     public String visitAsig_stmt(chocogrammarParser.Asig_stmtContext ctx) {
         StringBuilder builder = new StringBuilder();
         return builder.append(getTargets(ctx)).append(visitExpr(ctx.expr())).toString();
+    }
+
+    @Override
+    public String visitTyped_var(chocogrammarParser.Typed_varContext ctx){
+        StringBuilder builder = new StringBuilder();
+        return ctx.ID().getText().replaceAll("self","this").toString();
+
     }
 
 

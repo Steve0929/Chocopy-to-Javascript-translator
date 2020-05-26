@@ -51,6 +51,9 @@ public class Translator extends chocogrammarBaseListener{
         }
 
 
+
+
+
     }
 
     @Override
@@ -58,6 +61,13 @@ public class Translator extends chocogrammarBaseListener{
 
         //System.out.println(ctx.parent.getText());
         //System.out.println(ctx.ID().getText());
+        //if(inside_class == true){
+        //}
+        if(inside_class){
+        /*System.out.println("\nPartes del vartyped------");
+        //System.out.println(ctx.ID().getText());
+        System.out.print(visitor.visitTyped_var(ctx));
+        System.out.println("------");*/}
     }
 
     public String translateLiteral(String literal) {
@@ -126,6 +136,9 @@ public class Translator extends chocogrammarBaseListener{
     @Override
     public void enterFunc_body(chocogrammarParser.Func_bodyContext ctx) {
         System.out.print("{");
+       /* if(inside_class == true){
+            System.out.println(ctx.func_def(0).func_body().getText().replaceAll("self","this"));
+        }*/
         System.out.println();
         toFile.append("{\n");
     }
@@ -159,8 +172,8 @@ public class Translator extends chocogrammarBaseListener{
     @Override
     public void enterAsig_stmt(chocogrammarParser.Asig_stmtContext ctx) {
         System.out.println();
-        System.out.println(visitor.visitAsig_stmt(ctx));
-        toFile.append("\n"+visitor.visitAsig_stmt(ctx)+"\n");
+        System.out.println(visitor.visitAsig_stmt(ctx).replaceAll("self","this"));
+        toFile.append("\n"+visitor.visitAsig_stmt(ctx).replaceAll("self","this")+"\n");
 
     }
     @Override
@@ -320,6 +333,7 @@ public class Translator extends chocogrammarBaseListener{
 
     @Override
     public void enterClass_body(chocogrammarParser.Class_bodyContext ctx){
+        StringBuilder builder = new StringBuilder();
 
         if(ctx.var_def() != null) {
             int i = 0;
@@ -360,7 +374,11 @@ public class Translator extends chocogrammarBaseListener{
                     System.out.println("init__(this)");
                     toFile.append("this.init__(this)\n");
                 }
+               /* System.out.println("flag");
+                System.out.println(ctx.func_def(j).func_body().getText());*/
+
             }
+
             System.out.println("}");
             toFile.append("}\n");
 

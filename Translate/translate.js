@@ -6,8 +6,8 @@ class animal {
     }
 
     make_noise() {
-        if (self.makes_noise) {
-            console.log(self.sound());
+        if (this.makes_noise) {
+            console.log(this.sound());
         }
 
     }
@@ -31,7 +31,7 @@ class cow extends animal {
 
     init__() {
 
-        self.makes_noise = true
+        this.makes_noise = true
 
     }
 
