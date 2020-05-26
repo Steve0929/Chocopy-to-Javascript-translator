@@ -1,17 +1,23 @@
 // Comentario
 class animal {
-    constructor(makes_noise) {
+    constructor(
+        makes_noise) {
         this.makes_noise = false;
     }
 
-    make_noise(self) {
+    make_noise() {
         if (self.makes_noise) {
             console.log(self.sound());
         }
 
     }
 
-    sound(self) {
+    sound() {
+        return "??? "
+
+    }
+
+    randomFunction(lol) {
         return "??? "
 
     }
@@ -23,13 +29,13 @@ class cow extends animal {
         this.init__(this)
     }
 
-    init__(self) {
+    init__() {
 
         self.makes_noise = true
 
     }
 
-    sound(self) {
+    sound() {
         return "moo"
 
     }

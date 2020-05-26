@@ -91,7 +91,8 @@ public class Translator extends chocogrammarBaseListener{
         StringBuilder builder = new StringBuilder();
         for(chocogrammarParser.Typed_varContext var:ctx.typed_var())
         {
-            builder.append(var.ID().getText()).append(", ");
+            if(!var.ID().getText().equals("self"))
+                builder.append(var.ID().getText()).append(", ");
         }
         String arguments = builder.toString();
         try {
@@ -323,7 +324,7 @@ public class Translator extends chocogrammarBaseListener{
         if(ctx.var_def() != null) {
             int i = 0;
             System.out.print("constructor(");
-            toFile.append("constructor(");
+            toFile.append("constructor(\n");
             while (i <= ctx.var_def().size() - 1) {
                 /*
                 if (i == 0) {
@@ -343,7 +344,7 @@ public class Translator extends chocogrammarBaseListener{
             if(is_child_class==true)
             {
                 System.out.println("super()");
-                toFile.append("super()");
+                toFile.append("super()\n");
             }
             i = 0;
             while (i <= ctx.var_def().size() - 1) {
@@ -357,7 +358,7 @@ public class Translator extends chocogrammarBaseListener{
                 if(ctx.func_def(j).ID().getText().equals("init__"))
                 {
                     System.out.println("init__(this)");
-                    toFile.append("this.init__(this)");
+                    toFile.append("this.init__(this)\n");
                 }
             }
             System.out.println("}");
