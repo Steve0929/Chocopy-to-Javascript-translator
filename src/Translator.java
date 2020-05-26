@@ -11,6 +11,7 @@ public class Translator extends chocogrammarBaseListener{
     private String imports;
     private ExpresionsVisitor visitor= new ExpresionsVisitor();
     private Boolean inside_class = false;
+    private Boolean is_child_class = false;
     private StringBuilder toFile = new StringBuilder();
 
     private static void write(String data) {
@@ -298,8 +299,9 @@ public class Translator extends chocogrammarBaseListener{
     public void enterClass_def(chocogrammarParser.Class_defContext ctx){
         inside_class = true;
         if(!ctx.ID(1).toString().equals("object")){
-        System.out.println("class "+ctx.ID(0)+" extends "+ctx.ID(1)+" {\n");
-        toFile.append("class "+ctx.ID(0)+" extends "+ctx.ID(1)+" {");
+            is_child_class = true;
+            System.out.println("class "+ctx.ID(0)+" extends "+ctx.ID(1)+" {\n");
+            toFile.append("class "+ctx.ID(0)+" extends "+ctx.ID(1)+" {");
         }
         else{
             System.out.println("class "+ctx.ID(0)+" {");
@@ -310,6 +312,7 @@ public class Translator extends chocogrammarBaseListener{
     @Override
     public void exitClass_def(chocogrammarParser.Class_defContext ctx){
         inside_class = false;
+        is_child_class = false;
         System.out.println("}");
         toFile.append("}\n");
     }
@@ -337,6 +340,11 @@ public class Translator extends chocogrammarBaseListener{
             }
             System.out.println(") {");
             toFile.append(") {\n");
+            if(is_child_class==true)
+            {
+                System.out.println("super()");
+                toFile.append("super()");
+            }
             i = 0;
             while (i <= ctx.var_def().size() - 1) {
                 System.out.println("this." + ctx.var_def(i).typed_var().ID().getText() + " = " + visitor.visitLiteral(ctx.var_def(i).literal())  + ";");
@@ -344,9 +352,20 @@ public class Translator extends chocogrammarBaseListener{
 
                 i++;
             }
+            for(int j = 0; j <= ctx.func_def().size() - 1; j++)
+            {
+                if(ctx.func_def(j).ID().getText().equals("init__"))
+                {
+                    System.out.println("init__(this)");
+                    toFile.append("this.init__(this)");
+                }
+            }
             System.out.println("}");
             toFile.append("}\n");
+
         }
+
+
         if(ctx.func_def() != null){
            /* System.out.println("Funciones");
             System.out.println(ctx.func_def());*/
