@@ -252,7 +252,7 @@ public class Translator extends chocogrammarBaseListener{
             System.out.println(") {");
             i = 0;
             while (i <= ctx.var_def().size() - 1) {
-                System.out.println("this." + ctx.var_def(i).typed_var().ID().getText() + " = " + ctx.var_def(i).literal().getText() + ";");
+                System.out.println("this." + ctx.var_def(i).typed_var().ID().getText() + " = " + visitor.visitLiteral(ctx.var_def(i).literal())  + ";");
 
                 i++;
             }
