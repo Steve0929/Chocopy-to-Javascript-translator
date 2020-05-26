@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 public class Translator extends chocogrammarBaseListener{
 
     private ExpresionsVisitor visitor= new ExpresionsVisitor();
+
     private StringBuilder toFile = new StringBuilder();
     private static void write(String data) {
         try {
@@ -14,7 +15,7 @@ public class Translator extends chocogrammarBaseListener{
         }
     }
 
-
+    private Boolean inside_class = false;
 
 
     @Override
@@ -29,8 +30,15 @@ public class Translator extends chocogrammarBaseListener{
 
     @Override
     public void enterVar_def(chocogrammarParser.Var_defContext ctx) {
-        System.out.print("var "+ctx.typed_var().ID().getText()+" = "+translateLiteral(ctx.literal().getText())+" ");
-        toFile.append("var "+ctx.typed_var().ID().getText()+" = "+translateLiteral(ctx.literal().getText())+" ");
+
+        //System.out.println(ctx.parent.getRuleIndex());
+        //System.out.println(ctx.parent.getClass().toString());
+        //String parent = ctx.parent.getClass().toString(); //class chocogrammarParser$Class_bodyContext
+        if(inside_class == false){
+            System.out.print("var "+ctx.typed_var().ID().getText()+" = "+translateLiteral(ctx.literal().getText())+" ");
+            toFile.append("var "+ctx.typed_var().ID().getText()+" = "+translateLiteral(ctx.literal().getText())+" ");
+        }
+
 
     }
 
@@ -86,8 +94,15 @@ public class Translator extends chocogrammarBaseListener{
     }
     @Override
     public void enterFunc_def(chocogrammarParser.Func_defContext ctx) {
-        System.out.print( "function "+ctx.ID().getText()+"("+ getFunctionArgs(ctx) +")");
-        toFile.append( "function "+ctx.ID().getText()+"("+ getFunctionArgs(ctx) +")");
+        if(inside_class == true){
+            System.out.print( " "+ctx.ID().getText()+"("+ getFunctionArgs(ctx) +")");
+            toFile.append( " "+ctx.ID().getText()+"("+ getFunctionArgs(ctx) +")");
+        }
+        else{
+            System.out.print( "function "+ctx.ID().getText()+"("+ getFunctionArgs(ctx) +")");
+            toFile.append( "function "+ctx.ID().getText()+"("+ getFunctionArgs(ctx) +")");
+        }
+
     }
     @Override
     public void exitFunc_def(chocogrammarParser.Func_defContext ctx) {
@@ -271,7 +286,7 @@ public class Translator extends chocogrammarBaseListener{
 
     @Override
     public void enterClass_def(chocogrammarParser.Class_defContext ctx){
-
+        inside_class = true;
         if(!ctx.ID(1).toString().equals("object")){
         System.out.println("class "+ctx.ID(0)+" extends "+ctx.ID(1)+" {");}
         else{
@@ -281,7 +296,7 @@ public class Translator extends chocogrammarBaseListener{
 
     @Override
     public void exitClass_def(chocogrammarParser.Class_defContext ctx){
-
+        inside_class = false;
         System.out.println("}");
     }
 
@@ -290,11 +305,12 @@ public class Translator extends chocogrammarBaseListener{
 
         if(ctx.var_def() != null) {
             int i = 0;
-
+            System.out.print("constructor(");
             while (i <= ctx.var_def().size() - 1) {
+                /*
                 if (i == 0) {
                     System.out.print("constructor(");
-                }
+                }*/
                 if (i < ctx.var_def().size() - 1) {
                     System.out.print(ctx.var_def(i).typed_var().ID().getText() + ",");
                 } else {
