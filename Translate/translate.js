@@ -1,3 +1,5 @@
+//please run npm i readline-sync if you havent
+var readlineSync = require('readline-sync');
 //ii
 //abc
 var count = 0

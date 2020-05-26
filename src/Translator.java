@@ -4,9 +4,15 @@ import java.nio.file.Paths;
 
 public class Translator extends chocogrammarBaseListener{
 
+    public Translator(String imports)
+    {
+        this.imports = imports;
+    }
+    private String imports;
     private ExpresionsVisitor visitor= new ExpresionsVisitor();
-
+    private Boolean inside_class = false;
     private StringBuilder toFile = new StringBuilder();
+
     private static void write(String data) {
         try {
             Files.write(Paths.get("Translate/translate.js"), data.getBytes());
@@ -15,8 +21,10 @@ public class Translator extends chocogrammarBaseListener{
         }
     }
 
-    private Boolean inside_class = false;
-
+    @Override
+    public void enterProgram(chocogrammarParser.ProgramContext ctx) {
+        toFile.append(imports);
+    }
 
     @Override
     public void enterGlobal_decl(chocogrammarParser.Global_declContext ctx) {

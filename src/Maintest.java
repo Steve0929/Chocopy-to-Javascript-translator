@@ -103,8 +103,9 @@ public class Maintest {
             //Create generic parse tree walker
             ParseTreeWalker walker = new ParseTreeWalker();
             //Walk the tree
-            walker.walk(new CheckForImports(),tree);
-            walker.walk(new Translator(), tree);
+            CheckForImports importCheck = new CheckForImports();
+            walker.walk(importCheck,tree);
+            walker.walk(new Translator(importCheck.getImports()), tree);
             System.out.println();//print ln after translation
         }
        catch(Exception e){
