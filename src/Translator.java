@@ -164,7 +164,7 @@ public class Translator extends chocogrammarBaseListener{
     @Override
     public void exitPrint(chocogrammarParser.PrintContext ctx) {
         System.out.println(");");
-        toFile.append(");");
+        toFile.append(");\n");
     }
 
 

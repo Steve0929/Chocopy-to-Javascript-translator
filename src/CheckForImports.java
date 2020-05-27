@@ -26,6 +26,7 @@ public class CheckForImports extends chocogrammarBaseListener{
             System.out.println("//Try running the code from a console if your IDE is failing to run it");
             System.out.println("var readlineSync = require('readline-sync');");
             toFile.append("//please run npm i readline-sync if you havent\n");
+            toFile.append("//Try running the code from a console if your IDE is failing to run it\n");
             toFile.append("var readlineSync = require('readline-sync');\n");
         }
 

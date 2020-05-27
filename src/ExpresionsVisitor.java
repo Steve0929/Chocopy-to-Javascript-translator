@@ -42,7 +42,7 @@ public class ExpresionsVisitor extends chocogrammarBaseVisitor<String> {
         else if(ctx.IF()!=null)
         {
             //expr IF expr ELSE expr ----> condición ? expr1 : expr2
-            builder.append(visitExpr(ctx.expr(0))).append(" ? ").append(visitExpr(ctx.expr(1))).
+            builder.append(visitExpr(ctx.expr(1))).append(" ? ").append(visitExpr(ctx.expr(0))).
                     append(" : ").append(visitExpr(ctx.expr(2)));
         }
         return builder.toString().replaceAll("self","this");
