@@ -20,5 +20,8 @@ class cow(animal):
         return "moo"
 
 c:animal = None
+
 c = cow()
-c.makes_noise()     #Prints "moo"
+c.make_noise()
+
+     #Prints "moo"

@@ -72,6 +72,7 @@ public class ExpresionsVisitor extends chocogrammarBaseVisitor<String> {
         if(ctx.cexpr(0)!=null && ctx.TK_PUNTO()!=null && ctx.TK_PAR_IZQ()==null)
         {
             //cexpr TK_PUNTO ID
+            
             return builder.append(visitCexpr(ctx.cexpr(0))).append(".").append(ctx.ID().getText()).toString();
         }
         if(ctx.cexpr(0)!=null && ctx.TK_COR_IZQ()!=null)
@@ -190,6 +191,7 @@ public class ExpresionsVisitor extends chocogrammarBaseVisitor<String> {
         if(ctx.TK_PUNTO()!=null)
         {
             //cexpr TK_PUNTO ID
+
             return builder.append(visitCexpr(ctx.cexpr())).append(".").append(ctx.ID().getText()).toString();
         }
         if(ctx.TK_COR_IZQ()!=null)

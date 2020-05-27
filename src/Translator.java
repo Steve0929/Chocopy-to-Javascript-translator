@@ -140,6 +140,14 @@ public class Translator extends chocogrammarBaseListener{
         toFile.append("\n");
     }
 
+    @Override
+    public void enterSimple_stmt(chocogrammarParser.Simple_stmtContext ctx) {
+        if(ctx.expr()!=null)
+        {
+            System.out.println(visitor.visitExpr(ctx.expr()));
+            toFile.append(visitor.visitExpr(ctx.expr()));
+        }
+    }
 
     @Override
     public void enterPrint(chocogrammarParser.PrintContext ctx) {
