@@ -117,6 +117,7 @@ nonlocal_decl : NONLOCAL ID posible_line_comment* NEWLINE;
 var_def : typed_var TK_ASIG literal posible_line_comment? NEWLINE;
 
 stmt : simple_stmt posible_line_comment? NEWLINE
+    |  simple_stmt posible_line_comment? NEWLINE? EOF
     | if_expr
     | while_expr
     | for_expr
