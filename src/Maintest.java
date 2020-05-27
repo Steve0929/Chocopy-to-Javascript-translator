@@ -43,7 +43,7 @@ public class Maintest {
                             break;
                         case "1":
                             System.out.println("Write the name of your file, your file MUST be inside the Input folder");
-                            System.out.println("Example: program.txt");
+                            System.out.println("Example: example.txt");
                             option = reader.readLine();
                             System.out.println("-----------------------------------------------");
                             try{
@@ -69,34 +69,7 @@ public class Maintest {
             //Parser
             chocogrammarParser parser = new chocogrammarParser(tokens);
             ParseTree tree = parser.program();
-            //Test
-            for (int index = 0; index < tokens.size(); index++)
-            {
-                //System.out.println("Entra al for");
-                Token token = tokens.get(index);
-                // substitute whatever parser you have
-                if (token.getChannel() != 0)
-                {
 
-                    String out = "";
-                    // Comments will be printed as channel 2 (configured in .g4 grammar file)
-                    out += "Channel: " + token.getChannel();
-                    out += " Type: " + token.getType();
-                    out += " Hidden: ";
-                    //List<Token> hiddenTokensToLeft = tokens.getHiddenTokensToLeft(index);
-                    /*for (int i = 0; hiddenTokensToLeft != null && i < hiddenTokensToLeft.size(); i++)
-                    {
-                        if (hiddenTokensToLeft.get(i).getChannel() != 0)
-                        {
-                            out += "\n\t" + i + ":";
-                            out += "\n\tChannel: " + hiddenTokensToLeft.get(i).getChannel() + "  Type: " + hiddenTokensToLeft.get(i).getType();
-                            out += hiddenTokensToLeft.get(i).getText().replaceAll("\\s", "");
-                        }
-                    }*/
-                    out += token.getText().replaceAll("#", "//");
-                    //System.out.println(out);
-                }
-            }
             //System.out.println(tokens.getTokens());
             //System.out.println(tree.toStringTree(parser));
             //Walker
