@@ -1,41 +1,16 @@
-// Comentario
-class animal {
-constructor(
-makes_noise) {
-this.makes_noise =  false ;
-}
-
- make_noise(){
-if(this.makes_noise){
-console.log(this.sound());
-}
-
-}
- sound(){
-return "??? "
-
-}
- randomFunction(lol){
-return "??? "
-
-}
-}
-class cow extends animal {constructor(
-) {
-super()
-this.init__(this)
-}
- init__(){
-
-this.makes_noise =  true 
-
-}
- sound(){
-return "moo"
-
-}
-}
+var a = 10000 
+var b = 2 
 var c = null 
 
-c = new cow()
-c.make_noise()//Prints "moo"
+c = a / b
+if([1,2].length  == 8){
+console.log( true );}else if(! true ) {
+console.log( false );
+}else if(typeof([1, 2]) == typeof([]) ) {
+console.log( false );
+
+}else{
+
+a = a ? a < b : b
+
+}

@@ -1,0 +1,15 @@
+a:int = 10000
+b:int = 2
+c:int = None
+
+c=a//b
+if(len([1,2])==8):
+    print(True)
+elif not True:
+    print(False)
+
+elif [1,2] is []:
+    print(False)
+
+else:
+    a = a if a < b else b
